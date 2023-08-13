@@ -1,33 +1,11 @@
-# company_component_next
+# `business`
 
-## Getting Started
+> TODO: description
 
-Install dependencies,
+## Usage
 
-```bash
-$ npm i
 ```
+const business = require('business');
 
-Start the dev server,
-
-```bash
-$ npm start
-```
-
-Build documentation,
-
-```bash
-$ npm run docs:build
-```
-
-Run test,
-
-```bash
-$ npm test
-```
-
-Build library via `father`,
-
-```bash
-$ npm run build
+// TODO: DEMONSTRATE API
 ```

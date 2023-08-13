@@ -1,0 +1,16 @@
+0 silly argv { _: [ 'create' ], lernaVersion: '4.0.0', '$0': 'lerna', name: 'bert' }
+1 notice cli v4.0.0
+2 verbose rootPath /Users/bihuaizhi/Documents/duomaiCode/company_component_next
+3 error Error: canceled
+3 error     at Interface.<anonymous> (/Users/bihuaizhi/Documents/duomaiCode/company_component_next/node_modules/.pnpm/read@1.0.7/node_modules/read/lib/read.js:66:13)
+3 error     at Interface.emit (events.js:400:28)
+3 error     at Interface._ttyWrite (readline.js:1001:16)
+3 error     at ReadStream.onkeypress (readline.js:265:10)
+3 error     at ReadStream.emit (events.js:400:28)
+3 error     at emitKeys (internal/readline/utils.js:358:14)
+3 error     at emitKeys.next (<anonymous>)
+3 error     at ReadStream.onData (readline.js:1270:36)
+3 error     at ReadStream.emit (events.js:400:28)
+3 error     at addChunk (internal/streams/readable.js:293:12)
+3 error     at readableAddChunk (internal/streams/readable.js:267:9)
+3 error     at ReadStream.Readable.push (internal/streams/readable.js:206:10)

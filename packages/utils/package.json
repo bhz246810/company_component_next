@@ -1,8 +1,36 @@
 {
-
-    "dependencies": {
-      "classnames": "^2.2.6"
-    }
-
+  "name": "@company_component_next/utils",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "fetch": "^1.1.0"
+  },
+  "description": "> TODO: description",
+  "version": "0.0.0",
+  "keywords": [
+    "utils"
+  ],
+  "author": "bert <3316793814@qq.com>",
+  "homepage": "https://github.com/bhz246810/company_component_next",
+  "license": "ISC",
+  "main": "lib/utils.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmmirror.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhz246810/company_component_next.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/bhz246810/company_component_next/issues"
   }
-  
+}
