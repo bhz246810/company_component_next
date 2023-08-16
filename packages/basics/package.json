@@ -12,13 +12,13 @@
   "author": "bert <3316793814@qq.com>",
   "homepage": "https://github.com/bhz246810/company_component_next",
   "license": "ISC",
-  "main": "lib/basics.js",
+  "main": "dist/basics.js",
   "directories": {
-    "lib": "lib",
+    "lib": "dist",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "publishConfig": {
     "registry": "https://registry.npmmirror.com/"

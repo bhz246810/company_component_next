@@ -12,7 +12,10 @@
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "basics": "lerna exec --scope example-basics -- dumi dev",
+    "business": "lerna exec --scope example-business -- dumi dev",
+    "utils": "lerna exec --scope example-utils -- dumi dev"
   },
   "workspaces": [
     "packages/*"
