@@ -1,17 +1,13 @@
 {
-  "ts-node": {
-    "transpileOnly": true,
-    "require": ["typescript-transform-paths/register"]
-  },
   "compilerOptions": {
-    "declaration": true,
     "outDir": "es",
+    "declaration": true,
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
-    "importHelpers": true,
-    "skipLibCheck": true,
     "preserveSymlinks": true,
+    "skipLibCheck": true,
+    "importHelpers": true,
     "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
@@ -19,19 +15,14 @@
     "strict": true,
     "allowSyntheticDefaultImports": true,
     // "types": ["node", "global"],
-    "typeRoots": ["../../node_modules/@types", "./node_modules/@types", "../../typings"],
-    "paths": {
-      "@basics@/*": ["./src/*"],
+    "typeRoots": [ "../../node_modules/@types", "./node_modules/@types", "../../typings"],
+    "paths": { 
       "@@/*": ["../../.umi/*"]
     },
-    "plugins": [
-      { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ]
   },
   "exclude": [
     "node_modules",
-    "dist",
+    "lib",
     "es",
     "dist",
     "typings",

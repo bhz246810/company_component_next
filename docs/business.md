@@ -11,7 +11,7 @@ nav:
 ```tsx
 import React, { useReducer } from 'react';
 import { Button } from 'antd';
-import { setGlobalVariable, getGlobalVariable } from '@dm-component-next/utils';
+import { setGlobalVariable, getGlobalVariable } from '@company-component-next/utils';
 const Test = () => {
   const [_, forceUpdate] = useReducer(() => ({}), {});
   return (
@@ -27,10 +27,7 @@ const Test = () => {
             env: {
               API_CONFIG_ENV: 'dev',
               API_CONFIG_BASE_API: '//cps-api.sk8s.cn/newgate/dm-crm/',
-              API_CONFIG_PERMISS_API: '//cps-api.sk8s.cn/newgate/permission/',
-              API_CONFIG_REMAI_API: '//hotmai.sk8s.cn/',
               API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/newgate/newcps/backend',
-              API_CONFIG_BUSINESS_API_URL: '//finance-sdk-test-backend.sk8s.cn/',
               API_CONFIG_BIG_DATA_URL: '//data.sk8s.cn',
               API_CONFIG_CONTRACT_URL: '//contract.sk8s.cn/',
               API_CONFIG_PUBLIC_URL: '//component.sk8s.cn/',
@@ -52,8 +49,6 @@ const Test = () => {
             env: {
               API_CONFIG_ENV: 'pro',
               API_CONFIG_BASE_API: 'https://apigate.duomai.com/newgate/dm-crm/',
-              API_CONFIG_PERMISS_API: 'https://apigate.duomai.com/newgate/permission/',
-              API_CONFIG_REMAI_API: 'https://hotmai.duomai.com/',
               API_CONFIG_CPS_API_URL: 'https://apigate.duomai.com/newgate/newcps/backend',
               API_CONFIG_BIG_DATA_URL: '//basic-data.duomai.com',
               API_CONFIG_CONTRACT_URL: 'https://contract.duomai.com/',

@@ -9,8 +9,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { request as innerRequest, utils } from '@dm-component-next/utils';
-import { Method } from '@dm-component-next/utils/typings/axios';
+import { request as innerRequest, utils } from '@company-component-next/utils';
+import { Method } from '@company-component-next/utils/typings/axios';
 import {
   AutoComplete,
   AutoCompleteProps,
@@ -195,7 +195,7 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
      * @description:进行列表查询
      * @param {any} params
      * @return {*}
-     * @author: michael_jier
+     * @author: Bert
      */
 
     const debounceGetList = useCallback(

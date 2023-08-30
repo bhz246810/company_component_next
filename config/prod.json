@@ -1,8 +1,6 @@
 {
   "API_CONFIG_ENV": "pro",
   "API_CONFIG_BASE_API": "https://apigate.duomai.com/newgate/dm-crm/",
-  "API_CONFIG_PERMISS_API": "https://apigate.duomai.com/newgate/permission/",
-  "API_CONFIG_REMAI_API": "https://hotmai.duomai.com/",
   "API_CONFIG_CPS_API_URL": "https://apigate.duomai.com/newgate/newcps/backend",
   "API_CONFIG_BIG_DATA_URL": "//basic-data.duomai.com",
   "API_CONFIG_BIG_MID_FINANCE_URL": "https://finance-api.duomai.com/backend/",

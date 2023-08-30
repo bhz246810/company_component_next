@@ -83,9 +83,6 @@ export default defineConfig({
   alias: {
     '@basics@': path.resolve(__dirname, './packages/basics/src'),
     '@business@': path.resolve(__dirname, './packages/business/src'),
-    '@midfinance@': path.resolve(__dirname, './packages/midfinance/src'),
-    '@midproject@': path.resolve(__dirname, './packages/midproject/src'),
-    '@mobile@': path.resolve(__dirname, './packages/mobile/src'),
   },
   // more config: https://d.umijs.org/config
 });

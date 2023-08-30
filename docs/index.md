@@ -1,6 +1,6 @@
 ---
 hero:
-  title: 新版组件库
+  title: 组件库
   desc: dm-component-next
   actions:
     - text: 开始
@@ -32,13 +32,11 @@ footer: Open-source MIT Licensed | Copyright © 2020<br />Powered by [dumi](http
 
 ```bash
 # 基础组件包
-npm install @dm-component-next/basics
+npm install @company-component-next/basics
 # 业务组件包
-npm install @dm-component-next/business
-# 项目中台业务组件包
-npm install @dm-component-next/midproject
+npm install @company-component-next/business
 # 工具包
-npm install @dm-component-next/utils
+npm install @company-component-next/utils
 ```
 
 #### 环境变量
@@ -50,7 +48,7 @@ npm install @dm-component-next/utils
 ```tsx
 import React, { useReducer } from 'react';
 import { Button } from 'antd';
-import { setGlobalVariable, getGlobalVariable } from '@dm-component-next/utils';
+import { setGlobalVariable, getGlobalVariable } from '@company-component-next/utils';
 const Test = () => {
   const [_, forceUpdate] = useReducer(() => ({}), {});
   return (
@@ -66,8 +64,6 @@ const Test = () => {
             env: {
               API_CONFIG_ENV: 'dev',
               API_CONFIG_BASE_API: '//cps-api.sk8s.cn/newgate/dm-crm/',
-              API_CONFIG_PERMISS_API: '//cps-api.sk8s.cn/newgate/permission/',
-              API_CONFIG_REMAI_API: '//hotmai.sk8s.cn/',
               API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/newgate/newcps/backend',
               API_CONFIG_BIG_DATA_URL: '//data.sk8s.cn',
             },
@@ -88,8 +84,6 @@ const Test = () => {
             env: {
               API_CONFIG_ENV: 'pro',
               API_CONFIG_BASE_API: 'https://apigate.duomai.com/newgate/dm-crm/',
-              API_CONFIG_PERMISS_API: 'https://apigate.duomai.com/newgate/permission/',
-              API_CONFIG_REMAI_API: 'https://hotmai.duomai.com/',
               API_CONFIG_CPS_API_URL: 'https://apigate.duomai.com/newgate/newcps/backend',
               API_CONFIG_BIG_DATA_URL: 'https://basic-data.duomai.com',
             },
@@ -120,13 +114,13 @@ export default Test;
  extraBabelPlugins: [
       [
         'import',
-        { libraryName: '@dm-component-next/basics', libraryDirectory: 'es', camel2DashComponentName: false },
-        '@dm-component-next/basics'
+        { libraryName: '@company-component-next/basics', libraryDirectory: 'es', camel2DashComponentName: false },
+        '@company-component-next/basics'
       ],
       [
         'import',
-        { libraryName: '@dm-component-next/business' ,camel2DashComponentName: false},
-        '@dm-component-next/business'
+        { libraryName: '@company-component-next/business' ,camel2DashComponentName: false},
+        '@company-component-next/business'
       ],
     ],
   }
@@ -138,9 +132,9 @@ export default Test;
 {
    ...,
    extraBabelIncludes: [
-    '@dm-component-next/basics',
-    '@dm-component-next/business',
-    '@dm-component-next/utils',
+    '@company-component-next/basics',
+    '@company-component-next/business',
+    '@company-component-next/utils',
   ],
 }
 ```
@@ -157,7 +151,6 @@ export default Test;
 1.  组件/模块/常量/hooks 在不同 packages 中开发
     - `basics` 基础组件
     - `business` 业务组件
-    - `midproject` 项目中台业务组件
     - `utils` 工具类函数/hook 等
 2.  在 `src` 目录下开发组件/模块
     - `src/services` 目录用于存放接口相关文件
@@ -205,7 +198,7 @@ lv:patch/minor:change-alpha/change-stable
     > 1. [feature 分支] `lv:alpha`
     > 2. [test 分支] 合并 test，`release:beta`，测试没有问题
     > 3. [feature 分支] `lv:patch:change-stable`
-    > 4. [master 分支] 合并 master，release \***\*本仓库存储在[公司内网的 `npm` 私服](http://192.168.1.30:4873/)上，因此如需要下载最新版本，必须将 `npm` 或 `yarn` 的源切换为[公司内网的 `npm` 私服](http://192.168.1.30:4873/)，即 `http://192.168.1.30:4873/`。\*\***
+    > 4. [master 分支] 合并 master，release \***\*本仓库存储在[公司内网的 `npm` 私服](xxx)上，因此如需要下载最新版本，必须将 `npm` 或 `yarn` 的源切换为[公司内网的 `npm` 私服](xxx)，即 `xxx`。\*\***
 
 `@beta` 是测试环境使用的版本，其中模块的接口也都是测试环境的，具体发布指令查看 `package.json` 中的 `script` 即可。
 

@@ -1,36 +1,50 @@
 {
   "name": "@company_component_next/basics",
+  "version": "0.0.0",
+  "author": "bert <3316793814@qq.com>",
+  "private": false,
+  "license": "ISC",
+  "main": "dist/index.js",
+  "module": "es/index.js",
+  "types": "dist/index.d.ts",
+
+  "peerDependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@ant-design/pro-card": "^1.14.0",
+    "@ant-design/pro-form": "^1.42.0",
+    "antd": "^4.16.13",
+    "moment": "^2.29.1",
+    "react": "^16.12.0"
+  },
+  "devDependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@types/qs": "^6.9.6",
+    "@types/react": "17.x.x",
+    "@umijs/test": "^3.0.5",
+    "antd": "^4.21.5",
+    "babel-plugin-import": "^1.1.1",
+    "dumi": "1.1.38",
+    "father-build": "~1.19.6",
+    "gh-pages": "^3.0.0",
+    "lint-staged": "^10.0.7",
+    "moment": "^2.29.1",
+    "prettier": "^2.2.1",
+    "react": "~16.12.0",
+    "yorkie": "^2.0.0"
+  },
   "dependencies": {
     "classnames": "^2.2.6",
-    "fetch": "^1.1.0"
+    "immer": "^9.0.1",
+    "lodash": "^4.17.21",
+    "number-precision": "^1.5.2",
+    "qs": "^6.10.3",
+    "styled-components": "^5.3.3"
   },
-  "description": "> TODO: description",
-  "version": "0.0.0",
+
   "keywords": [
     "basics"
   ],
-  "author": "bert <3316793814@qq.com>",
-  "homepage": "https://github.com/bhz246810/company_component_next",
-  "license": "ISC",
-  "main": "dist/basics.js",
-  "directories": {
-    "lib": "dist",
-    "test": "__tests__"
-  },
-  "files": [
-    "dist"
-  ],
-  "publishConfig": {
-    "registry": "https://registry.npmmirror.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bhz246810/company_component_next.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
-  "bugs": {
-    "url": "https://github.com/bhz246810/company_component_next/issues"
-  }
+ 
+  "homepage": "https://github.com/bhz246810/company_component_next"
+  
 }

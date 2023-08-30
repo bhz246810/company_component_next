@@ -19,7 +19,7 @@ Demo:
 
 ```tsx
 import React from 'react';
-import { DmRangePicker } from '@dm-component-next/basics';
+import { DmRangePicker } from '@company-component-next/basics';
 export default () => (
   <div>
     <DmRangePicker />
@@ -35,7 +35,7 @@ Demo:
 
 ```tsx
 import React from 'react';
-import { DmRangePicker } from '@dm-component-next/basics';
+import { DmRangePicker } from '@company-component-next/basics';
 export default () => (
   <div>
     <DmRangePicker showTime />

@@ -14,7 +14,7 @@ group:
 ```tsx
 import React, { useRef, useState } from 'react';
 import { message } from 'antd';
-import { useOnFatherClick } from '@dm-component-next/utils';
+import { useOnFatherClick } from '@company-component-next/utils';
 const Test = () => {
   const testRef = useRef(null);
   useOnFatherClick(testRef, {
@@ -37,7 +37,6 @@ const Test = () => {
 export default Test;
 ```
 
-其他案例(multi)：ApprovalPaymentTable<a href="https://gitlab.duomai.cn/lowcode/front/dm-component-next/-/blob/master/packages/midproject/src/ApprovalPaymentTable/index.tsx#L100"></a>
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | :-- | :-- | :-- | :-- | :-- |

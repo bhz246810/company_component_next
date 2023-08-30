@@ -329,7 +329,7 @@ export const number2cnText = (number: number | string, type: 'lower' | 'upper' =
  * @param {string} keyNames
  * @param {any} res
  * @return {*}
- * @author: michael_jier
+ * @author: Bert
  */
 export const getResKey = (keyNames: string, res: any) => {
   if (keyNames === '') return res;

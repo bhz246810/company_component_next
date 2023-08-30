@@ -1,13 +1,39 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "outDir": "./packages/basics/es/*",
+    "declaration": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "preserveSymlinks": true,
     "moduleResolution": "node",
+    "importHelpers": true,
     "jsx": "react",
     "esModuleInterop": true,
-    "types": ["jest"],
+    "sourceMap": true,
+    "baseUrl": "./",
     "strict": true,
-    "skipLibCheck": true,
-    "declaration": true
-  }
+    "allowSyntheticDefaultImports": true,
+    "types": ["node", "global"],
+    "typeRoots": [ "./node_modules/@types", "./typings"],
+    "paths": {
+      "@basics@/*": ["./packages/basics/src/*"],
+      "@business@/*": ["./packages/business/src/*"],
+      "@@/*": [".umi/*"]
+    },
+  },
+  "tsc-alias": {
+    "verbose": false
+  },
+  "exclude": [
+    "node_modules",
+    "lib",
+    "es",
+    "dist",
+    "typings",
+    "**/__test__",
+    "test",
+    "docs",
+    "tests"
+  ]
 }

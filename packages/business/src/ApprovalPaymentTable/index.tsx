@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState, ComponentType } from 'react';
 import styles from './index.less';
 import { incomeInfo as defaultIncomeInfo } from './services';
 import { Checkbox, DatePicker, Input } from 'antd';
-import { utils, useOnFatherClick } from '@dm-component-next/utils';
+import { utils, useOnFatherClick } from '@company-component-next/utils';
 const { number2cnText } = utils;
 import trim from 'lodash/trim';
 import moment from 'moment';

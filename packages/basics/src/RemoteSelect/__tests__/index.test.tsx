@@ -1,19 +1,15 @@
 /*
  * @Description: RemoteSelect 单测
  * @Version: 1.0.0
- * @Autor: michael_jier
+ * @Autor: Bert
  * @Date: 2022-03-30 12:07:32
- * @LastEditors: michael_jier
+ * @LastEditors: Bert
  * @LastEditTime: 2022-04-02 14:09:41
  */
-import { Input } from 'antd';
-import React, { SyntheticEvent } from 'react';
-import { renderHook, act } from '@testing-library/react-hooks';
+import React from 'react';
 import RemoteSelect, { RemoteSelectProps } from '..';
 import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
-import { Simulate } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
-import { request } from '@dm-component-next/utils';
 
 const DEBOUNCED_TIME = 300;
 afterEach(() => {

@@ -12,8 +12,8 @@ group:
 ```tsx
 import React, { useState } from 'react';
 import { Input, Form, Checkbox, Col, Row } from 'antd';
-import { ApprovalPaymentTable } from '@dm-component-next/business';
-import { uRequest } from '@dm-component-next/utils';
+import { ApprovalPaymentTable } from '@company-component-next/business';
+import { uRequest } from '@company-component-next/utils';
 
 const getCpsPayDetail = async (params: any) => {
   const res = await uRequest('/memberPay/batchPayPaperInfo', {

@@ -15,7 +15,7 @@ Remote Select
 
 ```tsx
 import React, { useState, useEffect, useRef } from 'react';
-import { RemoteSelect } from '@dm-component-next/basics';
+import { RemoteSelect } from '@company-component-next/basics';
 
 export default () => {
   const ref = useRef<any>();

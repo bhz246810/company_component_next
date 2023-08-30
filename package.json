@@ -1,56 +1,113 @@
 {
-  "private": true,
   "name": "company_component_next",
   "version": "1.0.0",
-  "scripts": {
-    "start": "dumi dev",
-    "docs:build": "dumi build",
-    "docs:deploy": "gh-pages -d docs-dist",
-    "build": "father build",
-    "publish": "lerna publish",
-    "deploy": "npm run docs:build && npm run docs:deploy",
-    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "test": "umi-test",
-    "test:coverage": "umi-test --coverage",
-    "prepublishOnly": "npm run build",
-    "basics": "lerna exec --scope example-basics -- dumi dev",
-    "business": "lerna exec --scope example-business -- dumi dev",
-    "utils": "lerna exec --scope example-utils -- dumi dev"
-  },
+  "description": "",
+  "main": "dist/index.ts",
+  "module": "src/index.ts",
+  "private": true,
   "workspaces": [
     "packages/*"
   ],
   "files": [
+    "src/[!.]*",
     "dist"
   ],
-  "module": "dist/esm/index.js",
-  "typings": "dist/esm/index.d.ts",
+  "engines": {
+    "node": ">=10",
+    "pnpm": ">=6"
+  },
+  "typings": "dist/index.d.ts",
+  "cz-customizable": {
+    "config": ".cz-config.js"
+  },
+  "lint-staged": {
+    "*.{js,jsx,tsx,ts}": "yarn prettier"
+  },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
-  "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
-      "prettier --write"
-    ],
-    "*.ts?(x)": [
-      "prettier --parser=typescript --write"
-    ]
+  "scripts": {
+    "start:dev": "cross-env NODE_OPTIONS=--max_old_space_size=4096 UMI_ENV=dev dumi dev",
+    "start:docs": "cross-env UMI_ENV=devDocs dumi dev",
+    "start:prod": "cross-env UMI_ENV=prod dumi dev",
+    "lv": "lerna version",
+    "commit": "git add -A && git-cz",
+    "add-commit": "git add -A && git-cz",
+    "lerna:bs": "lerna bootstrap",
+    "lerna:clean": "lerna clean && git clean -fdx node_modules",
+    "lerna:list": "lerna list",
+    "docs:deploy": "gh-pages -d docs-dist",
+    "docs:build": "cross-env UMI_ENV=prod dumi build",
+    "docs:build:test": "cross-env UMI_ENV=devDocs dumi build",
+    "build:dev": "cross-env UMI_ENV=dev father-build && lerna exec npx tsc-alias",
+    "build:business:dev": "cross-env UMI_ENV=dev PACKAGE=business father-build && lerna exec npx tsc-alias --scope @company-component-next/business",
+    "build:basics:dev": "cross-env UMI_ENV=dev PACKAGE=basics father-build && lerna exec npx tsc-alias --scope @company-component-next/basics",
+    "build:utils:dev": "cross-env UMI_ENV=dev PACKAGE=utils father-build",
+    "build:prod": "cross-env UMI_ENV=prod father-build && lerna exec npx tsc-alias",
+    "publish": "lerna publish",
+    "deploy": "npm run docs:build && npm run docs:deploy",
+    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
+    "test": "lerna exec umi-test",
+    "test:utils": "lerna exec umi-test --scope @company-component-next/utils",
+    "test:basics": "lerna exec umi-test --scope @company-component-next/basics",
+    "test:business": "lerna exec umi-test --scope @company-component-next/business",
+    "test:coverage": "umi-test --coverage"
   },
   "dependencies": {
-    "lerna": "4.0.0",
-    "react": "^18.0.0"
+    "axios": "0.21.4",
+    "immer": "^9.0.1",
+    "lodash": "^4.17.21",
+    "number-precision": "^1.5.2",
+    "qs": "6.10.3",
+    "rc-field-form": "^1.22.1",
+    "styled-components": "^5.3.3",
+    "umi": "3.5.20",
+    "umi-request": "1.4.0"
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@ant-design/pro-card": "~1.14.0",
+    "@ant-design/pro-form": "~1.42.0",
+    "@babel/eslint-parser": "^7.16.5",
+    "@rollup/plugin-alias": "^3.1.2",
+    "@rollup/plugin-commonjs": "16.0.0",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^13.0.0",
+    "@testing-library/react-hooks": "2.0.1",
+    "@testing-library/user-event": "13.5.0",
     "@types/jest": "^27.0.3",
+    "@types/lodash": "^4.14.197",
+    "@types/node": "^17.0.15",
+    "@types/qs": "^6.9.7",
     "@umijs/fabric": "^2.8.1",
     "@umijs/test": "^3.0.5",
+    "antd": "^4.21.5",
+    "builtin-modules": "^3.2.0",
+    "cross-env": "^7.0.3",
+    "cz-customizable": "^6.3.0",
+    "cz-lerna-changelog": "^2.0.3",
     "dumi": "^1.1.0",
+    "eslint": "^8.6.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.1.4",
     "father": "^4.0.0-rc.2",
+    "father-build": "1.20.5-2",
     "gh-pages": "^3.0.0",
+    "lerna": "4.0.0",
     "lint-staged": "^10.0.7",
+    "moment": "^2.29.1",
     "prettier": "^2.2.1",
+    "react": "~16.12.0",
+    "react-dom": "~16.12.0",
+    "react-test-renderer": "~16.12.0",
     "yorkie": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@ant-design/pro-card": "~1.14.0",
+    "@ant-design/pro-form": "~1.42.0",
+    "antd": "^4.16.13",
+    "moment": "^2.29.1",
+    "react": "^16.12.0"
   }
 }

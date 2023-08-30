@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 /*
  * @Description: useOnFatherClick
  * @Version: 1.0.0
- * @Autor: michael_jier
+ * @Autor: Bert
  * @Date: 2022-08-12 18:36:49
- * @LastEditors: michael_jier
+ * @LastEditors: Bert
  * @LastEditTime: 2022-08-15 15:48:59
  */
 type MultiRef = Record<string, React.MutableRefObject<any>>;
