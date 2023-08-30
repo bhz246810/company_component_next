@@ -15,12 +15,12 @@
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "types": ["node", "global"],
-    "typeRoots": [ "./node_modules/@types", "./typings"],
+    "typeRoots": ["./node_modules/@types", "./typings"],
     "paths": {
       "@basics@/*": ["./packages/basics/src/*"],
       "@business@/*": ["./packages/business/src/*"],
       "@@/*": [".umi/*"]
-    },
+    }
   },
   "tsc-alias": {
     "verbose": false

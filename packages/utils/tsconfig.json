@@ -15,10 +15,10 @@
     "strict": true,
     "allowSyntheticDefaultImports": true,
     // "types": ["node", "global"],
-    "typeRoots": [ "../../node_modules/@types", "./node_modules/@types", "../../typings"],
-    "paths": { 
+    "typeRoots": ["../../node_modules/@types", "./node_modules/@types", "../../typings"],
+    "paths": {
       "@@/*": ["../../.umi/*"]
-    },
+    }
   },
   "exclude": [
     "node_modules",

@@ -1,8 +1,8 @@
 {
-  "ts-node" : { 
-    "transpileOnly" : true, 
-    "require" : [  "typescript-transform-paths/register"] , 
-  }, 
+  "ts-node": {
+    "transpileOnly": true,
+    "require": ["typescript-transform-paths/register"]
+  },
   "compilerOptions": {
     "declaration": true,
     "outDir": "es",
@@ -20,8 +20,8 @@
     "allowSyntheticDefaultImports": true,
     // "types": ["node", "global"],
     "typeRoots": ["../../node_modules/@types", "./node_modules/@types", "../../typings"],
-    "paths": { 
-      "@basics@/*": ["./src/*"],  
+    "paths": {
+      "@basics@/*": ["./src/*"],
       "@@/*": ["../../.umi/*"]
     },
     "plugins": [
