@@ -1,11 +1,12 @@
+import { message, notification } from 'antd';
+import debounce from 'lodash/debounce';
 /**
  * request 网络请求工具
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
-import { history } from 'umi';
+// import { extend, RequestMethod, ResponseError } from 'umi';
 import { extend, RequestMethod, ResponseError } from 'umi-request';
-import { notification, message } from 'antd';
-import debounce from 'lodash/debounce';
+
 import getGlobalVariable from './getGlobalVariable';
 
 const codeMessage: { [key: number]: string } = {
@@ -134,9 +135,9 @@ const handleRequest = (request: RequestMethod<false>, key?: string) => {
           message: '当前用户还未做关联，暂无权限访问该应用',
           description: res.m,
         });
-        process.env.NODE_ENV === 'development' || process.env.API_ENV === 'dev'
-          ? history.push('/login/login')
-          : history.push('/exception/403');
+        // process.env.NODE_ENV === 'development' || process.env.API_ENV === 'dev'
+        //   ? history.push('/login/login')
+        //   : history.push('/exception/403');
       } else {
         // 错误，全局提示
         !hideMessageError && message.error(res.m);
