@@ -692,8 +692,8 @@ var SingleEnv = /*#__PURE__*/ (function () {
         if (!this._instance) {
           this._instance = {
             API_CONFIG_ENV: 'dev',
-            API_CONFIG_BASE_API: '//cps-api.sk8s.cn/newgate/dm-crm/',
-            API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/newgate/newcps/backend',
+            API_CONFIG_BASE_API: '//cps-api.sk8s.cn/API_CONFIG_BASE_API/',
+            API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/API_CONFIG_CPS_API_URL',
             BUSINESS_API_REQUESET: process.env.BUSINESS_API_REQUESET,
             API_CONFIG_BIG_DATA_URL: '//data.sk8s.cn',
             API_CONFIG_SHAOMAI_API: process.env.API_CONFIG_SHAOMAI_API,

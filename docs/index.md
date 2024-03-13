@@ -1,7 +1,7 @@
 ---
 hero:
   title: 组件库
-  desc: dm-component-next
+  desc: company-component-next
   actions:
     - text: 开始
       link: /basics
@@ -63,8 +63,8 @@ const Test = () => {
           setGlobalVariable({
             env: {
               API_CONFIG_ENV: 'dev',
-              API_CONFIG_BASE_API: '//cps-api.sk8s.cn/newgate/dm-crm/',
-              API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/newgate/newcps/backend',
+              API_CONFIG_BASE_API: '//cps-api.sk8s.cn/API_CONFIG_BASE_API/',
+              API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/API_CONFIG_CPS_API_URL',
               API_CONFIG_BIG_DATA_URL: '//data.sk8s.cn',
             },
             writable: true, // 对象是否防止篡改
@@ -83,9 +83,9 @@ const Test = () => {
           setGlobalVariable({
             env: {
               API_CONFIG_ENV: 'pro',
-              API_CONFIG_BASE_API: 'https://apigate.duomai.com/newgate/dm-crm/',
-              API_CONFIG_CPS_API_URL: 'https://apigate.duomai.com/newgate/newcps/backend',
-              API_CONFIG_BIG_DATA_URL: 'https://basic-data.duomai.com',
+              API_CONFIG_BASE_API: 'https://apigate.xxx.com/API_CONFIG_BASE_API/',
+              API_CONFIG_CPS_API_URL: 'https://apigate.xxx.com/API_CONFIG_CPS_API_URL',
+              API_CONFIG_BIG_DATA_URL: 'https://basic-data.xxx.com',
             },
             writable: true, // 对象是否防止篡改
           });
@@ -169,7 +169,7 @@ export default Test;
 
 #### 简化的 gitflow 规范
 
-![gitflow参考](https://front-static.duomai.com/dm-component-next/git.png)
+
 
 #### commit
 

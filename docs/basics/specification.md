@@ -136,7 +136,7 @@ export default () => (
 
 ### 7.布局规则
 
-![](https://dm-img-test.duomai.com/20220224174214_jvr056ji98.png)
+![]一行四列，默认最多显示2行。
 
 ## 2.内容区
 
@@ -231,19 +231,16 @@ export default () => (
 
 可跨页选择设置按钮（可保存列表设置信息）
 
-![](https://image-duomai.oss-cn-hangzhou.aliyuncs.com/6218705a054d8)
 
 ### 9.分页器默认条数
 
 默认为 50 条
 
-![](https://image-duomai.oss-cn-hangzhou.aliyuncs.com/621870d4da912)
-
 ## 3.表单页
 
 ### 1.动态增减器
 
-![](https://dm-img-test.duomai.com/20220225145209_mrdbv0konh.png)
+![alt text](image.png)
 
 ### 2.输入框
 

@@ -37,8 +37,8 @@ const Test = () => {
           setGlobalVariable({
             env: {
               API_CONFIG_ENV: 'dev',
-              API_CONFIG_BASE_API: '//cps-api.sk8s.cn/newgate/dm-crm/',
-              API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/newgate/newcps/backend',
+              API_CONFIG_BASE_API: '//cps-api.sk8s.cn/API_CONFIG_BASE_API/',
+              API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/API_CONFIG_CPS_API_URL',
             },
             writable: true, // 对象是否防止篡改
           });
@@ -56,8 +56,8 @@ const Test = () => {
           setGlobalVariable({
             env: {
               API_CONFIG_ENV: 'pro',
-              API_CONFIG_BASE_API: 'https://apigate.duomai.com/newgate/dm-crm/',
-              API_CONFIG_CPS_API_URL: 'https://apigate.duomai.com/newgate/newcps/backend',
+              API_CONFIG_BASE_API: 'https://apigate.xxx.com/API_CONFIG_BASE_API/',
+              API_CONFIG_CPS_API_URL: 'https://apigate.xxx.com/API_CONFIG_CPS_API_URL',
             },
             writable: true, // 对象是否防止篡改
           });

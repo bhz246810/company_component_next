@@ -1,4 +1,4 @@
-# dm-component-next
+# company-component-next
 
 dumi + lerna + pnpm
 
@@ -42,7 +42,7 @@ lv:minor:change-stable # 0.2.0-alpha.0 => 0.2.0
 
 ## Publish
 
-1. git 规范参考 ![gitflow参考](https://front-static.duomai.com/dm-component-next/git.png)
+1. git 规范参考 ![gitflow参考]
    > ⚠️ 文档打包：请在 master-docs 和 test-docs 下打包 ⚠️ 不要单独 push 如何 commit 到 test 和 master 分支
 2. 流程
    1. 确定版本号，yarn lv:xxx (feature 分支)

@@ -25,7 +25,7 @@ export default () => {
   return (
     <RemoteSelect
       ref={ref}
-      searchUrl="https://cps-api.sk8s.cn/newgate/dm-crm/backend/mcn/list?pageSize=9999"
+      searchUrl="https://cps-api.sk8s.cn/xxx/list?pageSize=9999"
       style={{ width: '200px' }}
       listKey="data, d, Results"
       searchParams={(value) => ({

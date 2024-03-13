@@ -26,8 +26,8 @@ const Test = () => {
           setGlobalVariable({
             env: {
               API_CONFIG_ENV: 'dev',
-              API_CONFIG_BASE_API: '//cps-api.sk8s.cn/newgate/dm-crm/',
-              API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/newgate/newcps/backend',
+              API_CONFIG_BASE_API: '//cps-api.sk8s.cn/API_CONFIG_BASE_API/',
+              API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/API_CONFIG_CPS_API_URL',
               API_CONFIG_BIG_DATA_URL: '//data.sk8s.cn',
               API_CONFIG_CONTRACT_URL: '//contract.sk8s.cn/',
               API_CONFIG_PUBLIC_URL: '//component.sk8s.cn/',
@@ -48,11 +48,11 @@ const Test = () => {
           setGlobalVariable({
             env: {
               API_CONFIG_ENV: 'pro',
-              API_CONFIG_BASE_API: 'https://apigate.duomai.com/newgate/dm-crm/',
-              API_CONFIG_CPS_API_URL: 'https://apigate.duomai.com/newgate/newcps/backend',
-              API_CONFIG_BIG_DATA_URL: '//basic-data.duomai.com',
-              API_CONFIG_CONTRACT_URL: 'https://contract.duomai.com/',
-              API_CONFIG_PUBLIC_URL: 'https://component.duomai.com/api/',
+              API_CONFIG_BASE_API: 'https://apigate.xxx.com/API_CONFIG_BASE_API/',
+              API_CONFIG_CPS_API_URL: 'https://apigate.xxx.com/API_CONFIG_CPS_API_URL',
+              API_CONFIG_BIG_DATA_URL: '//basic-data.xxx.com',
+              API_CONFIG_CONTRACT_URL: 'https://contract.xxx.com/',
+              API_CONFIG_PUBLIC_URL: 'https://component.xxx.com/api/',
             },
             writable: true, // 对象是否防止篡改
           });

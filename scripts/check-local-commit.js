@@ -30,10 +30,10 @@ async function checkLocalCommit() {
   let { stdout } = await exec('git', ['status']);
   if (stdout.includes(`git push`)) {
     console.log(
-      '\x1B[31m请前往"https://gitlab.duomai.cn/lowcode/front/dm-component-next/-/merge_requests/new"提交合并请求来发布您的本地提交\x1B[0m',
+      '\x1B[31m请前往"https://github.com/bhz246810/company_component_next"提交合并请求来发布您的本地提交\x1B[0m',
     );
     await cli(
-      '前往"https://gitlab.duomai.cn/lowcode/front/dm-component-next/-/merge_requests/new"提交合并请求来发布您的本地提交',
+      '前往"https://github.com/bhz246810/company_component_next"提交合并请求来发布您的本地提交',
     );
   } else if (stdout.includes(`git add`)) {
     console.log('\x1B[31m请使用 "pnpm add-commit"\x1B[0m');

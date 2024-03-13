@@ -1,16 +1,15 @@
 import { defineConfig } from 'dumi';
 
-const title = 'company_component_next';
 const path = require('path');
 const favicon =
   'https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png';
 const logo =
   'https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png';
-const outputPath = 'docs-dist';
+
 // more config: https://d.umijs.org/config
 
 export default defineConfig({
-  title: 'dm-component-next',
+  title: 'company-component-next',
   favicon,
   logo,
   outputPath: 'docs-dist',
@@ -84,5 +83,6 @@ export default defineConfig({
     '@basics@': path.resolve(__dirname, './packages/basics/src'),
     '@business@': path.resolve(__dirname, './packages/business/src'),
   },
+  fastRefresh: {},
   // more config: https://d.umijs.org/config
 });
