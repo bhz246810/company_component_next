@@ -14,7 +14,9 @@ const businessCustomName = require('./packages/business/customName');
 const path = require('path');
 const modeEnv = {};
 for (const [key, value] of Object.entries(
-  process.env.UMI_ENV ? require(path.join(__dirname, `./config/${process.env.UMI_ENV}.json`)) : {},
+  process.env.UMI_ENV
+    ? require(path.join(__dirname, `./config/${process.env.UMI_ENV}.json`))
+    : {},
 )) {
   modeEnv['process.env.' + key] = value;
 }
@@ -97,7 +99,8 @@ export default {
         libraryName: '@company-component-next/business',
         camel2DashComponentName: false,
         customName: (name: string) =>
-          businessCustomName[name] || `@company-component-next/business/es/${name}`,
+          businessCustomName[name] ||
+          `@company-component-next/business/es/${name}`,
       },
       '@company-component-next/business',
     ],

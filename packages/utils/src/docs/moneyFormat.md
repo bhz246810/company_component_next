@@ -8,8 +8,9 @@ group:
 ---
 
 金额数字格式化（不保留小数）moneyFormat(value: string | number)
+
 ```tsx
-import React, {useReducer} from 'react'
+import React, { useReducer } from 'react';
 import { utils } from '@company-component-next/utils';
 const { moneyFormat } = utils;
 const Test = () => {
@@ -19,12 +20,11 @@ const Test = () => {
       <div>100000000 进行金额格式化：{moneyFormat(100000000)}</div>
       <div>88888888 进行金额格式化：{moneyFormat(88888888)}</div>
     </>
-  )
-}
-export default Test
+  );
+};
+export default Test;
 ```
 
-
-|属性 |说明 |类型 |默认值  |版本|
-|:-----|:-----|:-----|:-----|:-----|
-|value| 金额值（传入的参数）| `'number\|string'`|
+| 属性  | 说明                 | 类型               | 默认值   | 版本 |
+| :---- | :------------------- | :----------------- | :------- | :--- |
+| value | 金额值（传入的参数） | `'number\|string'` |

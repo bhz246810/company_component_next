@@ -12,13 +12,17 @@ nav:
 ```tsx
 import React, { useReducer } from 'react';
 import { Button } from 'antd';
-import { setGlobalVariable, getGlobalVariable } from '@company-component-next/utils';
+import {
+  setGlobalVariable,
+  getGlobalVariable,
+} from '@company-component-next/utils';
 const Test = () => {
   const [_, forceUpdate] = useReducer(() => ({}), {});
   return (
     <>
       <div style={{ marginBottom: 10 }}>
-        目前环境：{getGlobalVariable().API_CONFIG_ENV === 'dev' ? '测试' : '正式'}环境
+        目前环境：
+        {getGlobalVariable().API_CONFIG_ENV === 'dev' ? '测试' : '正式'}环境
       </div>
       <Button
         type="primary"
@@ -28,7 +32,8 @@ const Test = () => {
             env: {
               API_CONFIG_ENV: 'dev',
               API_CONFIG_BASE_API: '//bert-api.sk8s.cn/API_CONFIG_BASE_API/',
-              API_CONFIG_CPS_API_URL: '//bert-api.sk8s.cn/API_CONFIG_CPS_API_URL',
+              API_CONFIG_CPS_API_URL:
+                '//bert-api.sk8s.cn/API_CONFIG_CPS_API_URL',
             },
             writable: true, // 对象是否防止篡改
           });
@@ -46,8 +51,10 @@ const Test = () => {
           setGlobalVariable({
             env: {
               API_CONFIG_ENV: 'pro',
-              API_CONFIG_BASE_API: 'https://apigate.xxx.com/API_CONFIG_BASE_API/',
-              API_CONFIG_CPS_API_URL: 'https://apigate.xxx.com/API_CONFIG_CPS_API_URL',
+              API_CONFIG_BASE_API:
+                'https://apigate.xxx.com/API_CONFIG_BASE_API/',
+              API_CONFIG_CPS_API_URL:
+                'https://apigate.xxx.com/API_CONFIG_CPS_API_URL',
             },
             writable: true, // 对象是否防止篡改
           });

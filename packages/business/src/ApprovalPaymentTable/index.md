@@ -30,11 +30,14 @@ export default () => {
   return (
     <>
       <h3>项目中台</h3>
-      <Checkbox defaultChecked onChange={(e) => setEdit(e.target.checked)} /> 是否可以编辑
+      <Checkbox
+        defaultChecked
+        onChange={(e) => setEdit(e.target.checked)}
+      /> 是否可以编辑
       <ApprovalPaymentTable id="1567" edit={edit} />
       <h3>业务系统</h3>
-      开启部分编辑 edit=['depart','nature', 'date'] 开启部门、付款性质和付款日期（还有一个
-      付款总额amount 未开启）
+      开启部分编辑 edit=['depart','nature', 'date']
+      开启部门、付款性质和付款日期（还有一个 付款总额amount 未开启）
       <ApprovalPaymentTable
         incomeInfo={getCpsPayDetail}
         isFillTime
@@ -48,9 +51,15 @@ export default () => {
               <Col span={8}>税前:￥{info?.remarkFee?.amount || '0.00'}</Col>
               <Col span={8}>${info?.remarkFee?.sourceAmount || '0.00'}</Col>
               <Col span={8}>汇率:{info?.remarkFee?.currencyRate || '0.00'}</Col>
-              <Col span={8}>增值税:￥{info?.remarkFee?.taxAmount || '0.00'}</Col>
-              <Col span={8}>地税:￥{info?.remarkFee?.otherTaxAmount || '0.00'}</Col>
-              <Col span={8}>税费(手续费):￥{info?.remarkFee?.feeAmount || '0.00'}</Col>
+              <Col span={8}>
+                增值税:￥{info?.remarkFee?.taxAmount || '0.00'}
+              </Col>
+              <Col span={8}>
+                地税:￥{info?.remarkFee?.otherTaxAmount || '0.00'}
+              </Col>
+              <Col span={8}>
+                税费(手续费):￥{info?.remarkFee?.feeAmount || '0.00'}
+              </Col>
               <Col span={8}>税后:￥{info?.remarkFee?.payAmount || '0.00'}</Col>
               <Col span={8}>${info?.remarkFee?.paySourceAmount || '0.00'}</Col>
             </Row>

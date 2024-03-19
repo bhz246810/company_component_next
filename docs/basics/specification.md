@@ -94,7 +94,9 @@ const options = [
   },
 ];
 
-export default () => <Cascader defaultValue={['zhejiang', 'hangzhou', 'xihu']} options={options} />;
+export default () => (
+  <Cascader defaultValue={['zhejiang', 'hangzhou', 'xihu']} options={options} />
+);
 ```
 
 #### 2.计划/项目/商单选择框
@@ -121,7 +123,9 @@ export default () => (
       option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
     }
     filterSort={(optionA, optionB) =>
-      optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+      optionA.children
+        .toLowerCase()
+        .localeCompare(optionB.children.toLowerCase())
     }
   >
     <Option value="1">Not Identified</Option>
@@ -218,10 +222,17 @@ import { Tooltip } from 'antd';
 
 export default () => (
   <div
-    style={{ width: '200px', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}
+    style={{
+      width: '200px',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+    }}
   >
     <Tooltip title="萨拉丁开始打拉开圣诞节离开洒家大肆夸奖ask多久啊是的洒家打开手机的接口">
-      <span>萨拉丁开始打拉开圣诞节离开洒家大肆夸奖ask多久啊是的洒家打开手机的接口</span>
+      <span>
+        萨拉丁开始打拉开圣诞节离开洒家大肆夸奖ask多久啊是的洒家打开手机的接口
+      </span>
     </Tooltip>
   </div>
 );
@@ -301,7 +312,13 @@ const td = {
   color: '#7F7EA5',
 };
 export default () => (
-  <div style={{ borderTop: '16px solid #f0f2f5', backgroundColor: '#fff', padding: 15 }}>
+  <div
+    style={{
+      borderTop: '16px solid #f0f2f5',
+      backgroundColor: '#fff',
+      padding: 15,
+    }}
+  >
     <table style={hhh}>
       <tbody>
         <tr style={hhh}>

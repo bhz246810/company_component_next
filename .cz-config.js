@@ -1,6 +1,9 @@
 module.exports = {
   types: [
-    { value: 'WIP', name: '💪  WIP: 正在进行的工作, feat分支的 commit全部选择WIP' },
+    {
+      value: 'WIP',
+      name: '💪  WIP: 正在进行的工作, feat分支的 commit全部选择WIP',
+    },
     { value: 'feat', name: '✨  特性: 一个新的特性' },
     { value: 'fix', name: '🐞  修复: 修复一个Bug' },
     { value: 'docs', name: '📚  文档: 变更的只有文档' },

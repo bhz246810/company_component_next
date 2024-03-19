@@ -20,7 +20,9 @@ function useOnFatherClick(
     function handler(event: Event) {
       if (type === 'multi') {
         Object.entries(ref?.current as MultiRef).forEach(([name, value]) => {
-          (value?.current || value)?.contains(event.target) ? inside?.(name) : outside?.(name);
+          (value?.current || value)?.contains(event.target)
+            ? inside?.(name)
+            : outside?.(name);
         });
       } else if (type === 'single') {
         ref?.current?.contains(event.target) ? inside?.() : outside?.();

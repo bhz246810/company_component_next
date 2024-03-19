@@ -129,7 +129,10 @@ export function formatMoney(
 /**
  * @description 时间格式化
  */
-export function momentToString(value: Moment | string, format = 'YYYY-MM-DD'): string | undefined {
+export function momentToString(
+  value: Moment | string,
+  format = 'YYYY-MM-DD',
+): string | undefined {
   return moment(value).isValid() ? moment(value).format(format) : undefined;
 }
 
@@ -167,7 +170,9 @@ export const docCookies = {
       switch (vEnd.constructor) {
         case Number:
           sExpires =
-            vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
+            vEnd === Infinity
+              ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT'
+              : '; max-age=' + vEnd;
           break;
         case String:
           sExpires = '; expires=' + vEnd;
@@ -202,7 +207,9 @@ export const docCookies = {
   },
   hasItem: function (sKey: string) {
     return new RegExp(
-      '(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&') + '\\s*\\=',
+      '(?:^|;\\s*)' +
+        encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&') +
+        '\\s*\\=',
     ).test(document.cookie);
   },
   keys: /* optional method: you can safely remove it! */ function () {
@@ -247,7 +254,10 @@ export const numberFormat = (value: number, fix = 2) => {
  * @example number2text(100000000) => "壹亿元整"
  */
 
-export const number2cnText = (number: number | string, type: 'lower' | 'upper' = 'upper') => {
+export const number2cnText = (
+  number: number | string,
+  type: 'lower' | 'upper' = 'upper',
+) => {
   // 配置
   const confs = {
     lower: {
@@ -268,7 +278,9 @@ export const number2cnText = (number: number | string, type: 'lower' | 'upper' =
 
   // 过滤不合法参数
   if (Number(number) > confs.maxNumber) {
-    console.error(`The maxNumber is ${confs.maxNumber}. ${number} is bigger than it!`);
+    console.error(
+      `The maxNumber is ${confs.maxNumber}. ${number} is bigger than it!`,
+    );
     return '数值过大';
   }
 
@@ -278,19 +290,22 @@ export const number2cnText = (number: number | string, type: 'lower' | 'upper' =
   const decimal = Number(numbers[1]) === 0 ? [] : numbers[1]?.split?.('');
 
   // 四位分级
-  const levels = integer.reverse().reduce((pre: string[][], item: any, idx: number) => {
-    const level = pre[0] && pre[0].length < 4 ? pre[0] : [];
-    const value = item === '0' ? conf.num[item] : conf.num[item] + conf.unit[idx % 4];
-    level.unshift(value);
+  const levels = integer
+    .reverse()
+    .reduce((pre: string[][], item: any, idx: number) => {
+      const level = pre[0] && pre[0].length < 4 ? pre[0] : [];
+      const value =
+        item === '0' ? conf.num[item] : conf.num[item] + conf.unit[idx % 4];
+      level.unshift(value);
 
-    if (level.length === 1) {
-      pre.unshift(level);
-    } else {
-      pre[0] = level;
-    }
+      if (level.length === 1) {
+        pre.unshift(level);
+      } else {
+        pre[0] = level;
+      }
 
-    return pre;
-  }, []);
+      return pre;
+    }, []);
 
   // 整数部分
   const _integer = levels.reduce((pre, item, idx) => {

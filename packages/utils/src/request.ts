@@ -62,7 +62,10 @@ const instance: AxiosInstance = axios.create({
 instance.interceptors.request.use(
   (config: any) => {
     // console.log('[请求拦截器]', config);
-    if (!/^(http:\/\/|https:\/\/|\/\/)([\w.]+\/?)\S*/.test(config.url) && !config.baseURL) {
+    if (
+      !/^(http:\/\/|https:\/\/|\/\/)([\w.]+\/?)\S*/.test(config.url) &&
+      !config.baseURL
+    ) {
       // 删除多余的`/`
       getGlobalVariable().API_CONFIG_BASE_API?.slice(-1) === '/' &&
         config.url.slice(0, 1) === '/' &&
@@ -82,7 +85,9 @@ instance.interceptors.response.use(
 
     if (res.status >= 200 && res.status < 300) {
       // console.log('[test]', res.status);
-      if (get(res.headers, ['content-type'], '') !== 'application/vnd.ms-excel') {
+      if (
+        get(res.headers, ['content-type'], '') !== 'application/vnd.ms-excel'
+      ) {
         if (res.data?.f !== 1) {
           return Promise.reject(res).catch((err) => {
             console.log('【reject】', err);
@@ -95,7 +100,9 @@ instance.interceptors.response.use(
         if (data) {
           let fileName; // 默认 cors 暴露出 content-disposition 请求头，后端返回的filename中文乱码
           const attrs = res.headers['content-disposition']?.split(';'); // 获取文件名
-          fileName = attrs?.find((i: string) => i.includes('filename'))?.replace('filename=', '');
+          fileName = attrs
+            ?.find((i: string) => i.includes('filename'))
+            ?.replace('filename=', '');
           console.log('[fileName]', fileName);
           if (!fileName) fileName = '导出表格.csv';
           // 获取数据类型
@@ -118,7 +125,8 @@ instance.interceptors.response.use(
     } else if (res.status === 403) {
       notification.error({
         key: 'message 403',
-        message: '您暂无该操作权限，如有需要，请联系相关负责人员，如有疑问请联系产品工作人员',
+        message:
+          '您暂无该操作权限，如有需要，请联系相关负责人员，如有疑问请联系产品工作人员',
       });
     } else {
       return Promise.reject(res);
@@ -133,7 +141,9 @@ instance.interceptors.response.use(
       const { status } = response;
       if (status === 401) {
         if (getGlobalVariable()?.API_CONFIG_LOGIN_URL) {
-          window.location.replace(getGlobalVariable().API_CONFIG_LOGIN_URL || '/login');
+          window.location.replace(
+            getGlobalVariable().API_CONFIG_LOGIN_URL || '/login',
+          );
           return;
         }
 

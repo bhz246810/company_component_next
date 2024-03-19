@@ -25,7 +25,9 @@ describe('RemoteSelect', () => {
       testRq();
       resolve(1);
     });
-    const utils = render(<RemoteSelect searchUrl="" rq={rq as any} {...params} />);
+    const utils = render(
+      <RemoteSelect searchUrl="" rq={rq as any} {...params} />,
+    );
     const { container } = utils;
     const select = container.getElementsByClassName('ant-select-selector');
     const input = container.querySelector('input');

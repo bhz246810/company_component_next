@@ -62,7 +62,9 @@ describe('IncomeCreateOrEditModal 付款审批单', () => {
     });
   });
   it('测试isFillTime', async () => {
-    (jest.spyOn(Date, 'now') as any).mockReturnValue(new Date('2022-01-01T12:33:37.000Z'));
+    (jest.spyOn(Date, 'now') as any).mockReturnValue(
+      new Date('2022-01-01T12:33:37.000Z'),
+    );
     const table = render(<ApprovalPaymentTable isFillTime />);
     const { queryByText } = table;
     await waitFor(() => {
@@ -80,7 +82,9 @@ describe('IncomeCreateOrEditModal 付款审批单', () => {
       expect(checkbox?.length).toBe(0);
       expect(editArea?.length).toBe(0);
       expect(container.getElementsByClassName('ant-input')?.length).toBe(0);
-      expect(container.getElementsByClassName('ant-picker-input')?.length).toBe(0);
+      expect(container.getElementsByClassName('ant-picker-input')?.length).toBe(
+        0,
+      );
     });
   });
   it('测试edit传入 true，全部可以编辑', async () => {
@@ -92,27 +96,37 @@ describe('IncomeCreateOrEditModal 付款审批单', () => {
       expect(checkbox?.length).toBe(10); // 10个可选的 checkbox
       expect(editArea?.length).toBe(5);
       expect(container.getElementsByClassName('ant-input')?.length).toBe(2);
-      expect(container.getElementsByClassName('ant-picker-input')?.length).toBe(1);
+      expect(container.getElementsByClassName('ant-picker-input')?.length).toBe(
+        1,
+      );
     });
     await act(async () => {
-      await userEvent.click(container.querySelectorAll('[class*="amount"]')?.[0]?.children?.[1]);
+      await userEvent.click(
+        container.querySelectorAll('[class*="amount"]')?.[0]?.children?.[1],
+      );
     });
     await waitFor(() => {
       expect(container.getElementsByClassName('ant-input')?.length).toBe(3);
     });
   });
   it('测试edit传入数组["depart", "nature", "date"]', async () => {
-    const table = render(<ApprovalPaymentTable edit={['depart', 'nature', 'date']} />);
+    const table = render(
+      <ApprovalPaymentTable edit={['depart', 'nature', 'date']} />,
+    );
     const { container } = table;
     await act(async () => {
-      await userEvent.click(container.querySelectorAll('[class*="amount"]')?.[0]?.children?.[1]);
+      await userEvent.click(
+        container.querySelectorAll('[class*="amount"]')?.[0]?.children?.[1],
+      );
     });
     await waitFor(() => {
       expect(container.getElementsByClassName('ant-input')?.length).toBe(2);
     });
   });
   it('测试edit传入数组["depart", "nature"]', async () => {
-    const table = render(<ApprovalPaymentTable edit={['depart', 'nature']} id="1" />);
+    const table = render(
+      <ApprovalPaymentTable edit={['depart', 'nature']} id="1" />,
+    );
     const { container } = table;
     const checkbox = container.getElementsByClassName('ant-checkbox');
     const editArea = container.querySelectorAll('[class*="edit"]');
@@ -120,7 +134,9 @@ describe('IncomeCreateOrEditModal 付款审批单', () => {
       expect(checkbox?.length).toBe(10); // 10个可选的 checkbox
       expect(editArea?.length).toBe(4);
       expect(container.getElementsByClassName('ant-input')?.length).toBe(2);
-      expect(container.getElementsByClassName('ant-picker-input')?.length).toBe(0);
+      expect(container.getElementsByClassName('ant-picker-input')?.length).toBe(
+        0,
+      );
     });
   });
   it('测试edit传入数组["depart"]', async () => {
@@ -132,7 +148,9 @@ describe('IncomeCreateOrEditModal 付款审批单', () => {
       expect(checkbox?.length).toBe(10); // 10个可选的 checkbox
       expect(editArea?.length).toBe(3);
       expect(container.getElementsByClassName('ant-input')?.length).toBe(1);
-      expect(container.getElementsByClassName('ant-picker-input')?.length).toBe(0);
+      expect(container.getElementsByClassName('ant-picker-input')?.length).toBe(
+        0,
+      );
     });
   });
   it('测试incomeInfo、id、division_code、resKey', async () => {

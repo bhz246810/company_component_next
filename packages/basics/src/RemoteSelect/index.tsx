@@ -63,7 +63,9 @@ export type RemoteSelectProps = {
   /** 自定义的Value */
   customValue?: (item: any) => string | number;
   /** 自定义的Label */
-  customLabel?: (item: any) => ReactElement<any, string | JSXElementConstructor<any>> | string;
+  customLabel?: (
+    item: any,
+  ) => ReactElement<any, string | JSXElementConstructor<any>> | string;
   /** 接口返回自定义的List结构 */
   customList?: (item: any) => any[];
   /** 请求体返回list的路径，用`,`分割，如`data, d, Results` */
@@ -99,7 +101,10 @@ export type RemoteSelectProps = {
   /**  getlist useEffect的 dep 数组 */
   getListDep?: any[];
   /** popup(div)的 props */
-  popupProps?: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+  popupProps?: React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  >;
 } & (Partial<SelectProps<any>> | Partial<AutoCompleteProps>);
 
 const components = {
@@ -107,8 +112,9 @@ const components = {
   Select,
 };
 
-const ReactElement2String = (elem: ReactElement<any, string | JSXElementConstructor<any>>) =>
-  ReactDOMServer.renderToString(elem)?.replace(/<\/?.+?>|\s+/g, '') || '';
+const ReactElement2String = (
+  elem: ReactElement<any, string | JSXElementConstructor<any>>,
+) => ReactDOMServer.renderToString(elem)?.replace(/<\/?.+?>|\s+/g, '') || '';
 
 const getAllElementsText = (targets?: HTMLCollectionOf<Element>) => {
   let text = '';
@@ -222,7 +228,9 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
           setFetching(false);
         });
         // setAllPage(response[countKey || 'allPage'])
-        const list = customList ? customList(response) : getResKey(listKey, response) || [];
+        const list = customList
+          ? customList(response)
+          : getResKey(listKey, response) || [];
         setList(list);
         setFetching(false);
         getListAfter && getListAfter(list);
@@ -256,7 +264,8 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
       // 检查searchParams是否变化
       if (
         Object.keys(searchParams()).some(
-          (item: string) => (searchParams() as any)?.[item] !== (preParams as any)?.[item],
+          (item: string) =>
+            (searchParams() as any)?.[item] !== (preParams as any)?.[item],
         )
       ) {
         debounceGetList(searchParams());
@@ -291,7 +300,8 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
         </>
       );
     };
-    const UnitSelect = components[selectType === 'autoComplete' ? 'AutoComplete' : 'Select'];
+    const UnitSelect =
+      components[selectType === 'autoComplete' ? 'AutoComplete' : 'Select'];
 
     const TitleRender = () => {
       const [tooltipTitle, setTooltipTitle] = React.useState<string>('');
@@ -300,7 +310,9 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
           const text = getInputTooltipText
             ? getInputTooltipText(areaRef?.current)
             : getAllElementsText(
-                areaRef?.current?.getElementsByClassName('ant-select-selection-item'),
+                areaRef?.current?.getElementsByClassName(
+                  'ant-select-selection-item',
+                ),
               );
           setTooltipTitle(text || props?.value);
         }, 30),
@@ -312,7 +324,9 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
       <div style={{ width: '100%', ...(outDivstyle || style) }} ref={areaRef}>
         <Tooltip
           title={
-            props?.value === undefined || props?.value === null || !isShowInputTooltip
+            props?.value === undefined ||
+            props?.value === null ||
+            !isShowInputTooltip
               ? ''
               : TitleRender
           }
@@ -326,9 +340,15 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
             allowClear
             showSearch
             notFoundContent={
-              fetching ? <Spin size="small" /> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+              fetching ? (
+                <Spin size="small" />
+              ) : (
+                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+              )
             }
-            dropdownRender={dropdownRender ? dropdownRender(DropdownRender) : DropdownRender}
+            dropdownRender={
+              dropdownRender ? dropdownRender(DropdownRender) : DropdownRender
+            }
             onSearch={(value: string) => {
               debounceGetList(searchParams ? searchParams(value) : {});
             }}
@@ -342,7 +362,9 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
                   .toLowerCase()
                   .indexOf(input.toString().toLowerCase().trim()) >= 0;
               const children =
-                labelTooltip && inPopup ? option.children?.props?.title : option.children;
+                labelTooltip && inPopup
+                  ? option.children?.props?.title
+                  : option.children;
               if (isValidElement(children)) {
                 // customLabel使用时，判断是否是reactNode
                 // replace去除混入多余的html标签字符串
@@ -350,7 +372,9 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
                   ReactElement2String(children)
                     .toLowerCase()
                     .replace(/\s+/g, '')
-                    .indexOf(input.toString().toLowerCase().replace(/\s+/g, '')) ?? 0;
+                    .indexOf(
+                      input.toString().toLowerCase().replace(/\s+/g, ''),
+                    ) ?? 0;
                 // const result = option.children?.props?.children?.toString().toLowerCase().indexOf(input.toString().toLowerCase().trim()) ?? 0
                 return result >= 0 || valueResult;
               }
@@ -359,7 +383,8 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
                 children
                   ?.toString?.()
                   ?.toLowerCase?.()
-                  ?.indexOf?.(input.toString()?.toLowerCase?.()?.trim?.()) >= 0 || valueResult
+                  ?.indexOf?.(input.toString()?.toLowerCase?.()?.trim?.()) >=
+                  0 || valueResult
               );
             }}
             onChange={(value: any, option: any) => {
@@ -384,18 +409,30 @@ const RemoteSelect: React.FC<RemoteSelectProps> = forwardRef(
                   <Option
                     {...optionProps}
                     {...dynamicOptionProps(item)}
-                    value={customValue ? customValue(item) : getResKey(optionValueKey, item)}
+                    value={
+                      customValue
+                        ? customValue(item)
+                        : getResKey(optionValueKey, item)
+                    }
                     key={getResKey(optionValueKey, item)}
                     list={item}
                   >
                     {((label) =>
                       labelTooltip && inPopup ? (
-                        <Tooltip title={label} placement="topLeft" {...labelTooltipOptions}>
+                        <Tooltip
+                          title={label}
+                          placement="topLeft"
+                          {...labelTooltipOptions}
+                        >
                           {label}
                         </Tooltip>
                       ) : (
                         label
-                      ))(customLabel ? customLabel(item) : getResKey(optionLabelKey, item))}
+                      ))(
+                      customLabel
+                        ? customLabel(item)
+                        : getResKey(optionLabelKey, item),
+                    )}
                   </Option>
                 );
               })}

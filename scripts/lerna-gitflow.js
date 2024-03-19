@@ -12,12 +12,19 @@ function exec(cmd, args, opts = {}) {
 }
 
 async function getLernaVersion() {
-  const lernaJson = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../lerna.json')));
+  const lernaJson = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, '../lerna.json')),
+  );
   return lernaJson.version;
 }
 
 async function getLatestTaggedCommit() {
-  const { stdout } = await exec('git', ['rev-list', '--tags', '--max-count', 1]);
+  const { stdout } = await exec('git', [
+    'rev-list',
+    '--tags',
+    '--max-count',
+    1,
+  ]);
   if (!stdout) {
     return Promise.reject('Unable to find any tagged commit.');
   }
@@ -40,12 +47,22 @@ async function getCurrentBranch() {
 }
 
 async function lernaVersion(version) {
-  return exec('lerna', ['version', version, '--yes', '--no-push', '--force-publish']);
+  return exec('lerna', [
+    'version',
+    version,
+    '--yes',
+    '--no-push',
+    '--force-publish',
+  ]);
 }
 
 async function lernaChanged() {
-  const { stdout } = (await exec('lerna', ['changed']).catch(() => {})) || { stdout: '' };
-  const { gitStdout } = (await exec('git', ['status', '-s']).catch(() => {})) || { stdout: '' };
+  const { stdout } = (await exec('lerna', ['changed']).catch(() => {})) || {
+    stdout: '',
+  };
+  const { gitStdout } = (await exec('git', ['status', '-s']).catch(
+    () => {},
+  )) || { stdout: '' };
   if (gitStdout) {
     return Promise.reject('please use pnpm add-commit first');
   }
@@ -80,7 +97,9 @@ async function signTag() {
     );
   }
   await lernaVersion(
-    testVersion.split('-alpha.')[0] + '-alpha.' + (~~testVersion.match(/[^alpha.]+$/)[0] + 1),
+    testVersion.split('-alpha.')[0] +
+      '-alpha.' +
+      (~~testVersion.match(/[^alpha.]+$/)[0] + 1),
   );
 }
 
