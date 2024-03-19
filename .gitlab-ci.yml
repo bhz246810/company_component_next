@@ -1,0 +1,206 @@
+variables:
+  IMAGE_NAME: harbor.xxx.com/bert/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME
+
+stages:
+  - install
+  - publish
+  - verifyTest
+  - buildDocs
+  - buildImage
+  - deploy
+
+pnpm-install:
+  stage: install
+  image: harbor.xxx.com/library/pnpm:v14-2
+  only:
+    refs:
+      - test
+      - master
+    changes:
+      - package.json
+      - pnpm-lock.yaml
+
+  script:
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --no-frozen-lockfile
+    - pnpm lerna:bs
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .pnpm-store
+    policy: pull-push
+
+pnpm-publish:
+  stage: publish
+  image: harbor.xxx.com/library/pnpm:v14-2
+  only:
+    refs:
+      - test
+    changes:
+      - lerna.json
+      - .npmrc
+      - .gitlab-ci.yml
+  script:
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --no-frozen-lockfile
+    - pnpm lerna:bs
+    - git checkout .
+    - npx dumi g tmp
+    - pnpm release:beta:no-ask
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .pnpm-store
+    policy: pull
+  artifacts:
+    paths:
+      - packages/*/dist
+      - packages/*/es
+
+verify-test:
+  stage: verifyTest
+  image: harbor.xxx.com/library/pnpm:v14-2
+  only:
+    refs:
+      - test
+      - master
+    changes:
+      - lerna.json
+      - .npmrc
+      - .gitlab-ci.yml
+      # - packages/**/__tests__/**/*
+      # - packages/**/__test__/**/*
+      # - packages/**/jest.config.js
+  script:
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --no-frozen-lockfile
+    - pnpm lerna:bs
+    - npx dumi g tmp
+    - pnpm test:all-parallel:coverage
+  allow_failure: true
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .pnpm-store
+  artifacts:
+    paths:
+      - coverage/
+
+pnpm-buildDocs:
+  stage: buildDocs
+  image: harbor.xxx.com/library/pnpm:v14-2
+  only:
+    refs:
+      - test
+    changes:
+      - lerna.json
+      - .npmrc
+      - .gitlab-ci.yml
+  script:
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --no-frozen-lockfile
+    - pnpm lerna:bs
+    - pnpm docs:build:test
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .pnpm-store
+    policy: pull
+  artifacts:
+    paths:
+      - docs-dist/
+      - coverage/
+
+pnpm-publish-master:
+  stage: publish
+  image: harbor.xxx.com/library/pnpm:v14-2
+  only:
+    refs:
+      - master
+    changes:
+      - lerna.json
+      - .npmrc
+      - .gitlab-ci.yml
+  script:
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --no-frozen-lockfile
+    - pnpm lerna:bs
+    - git checkout .
+    - npx dumi g tmp
+    - pnpm release:no-check-and-ask
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .pnpm-store
+    policy: pull
+  artifacts:
+    paths:
+      - packages/*/dist
+      - packages/*/es
+
+pnpm-buildDocs-master:
+  stage: buildDocs
+  image: harbor.xxx.com/library/pnpm:v14-2
+  only:
+    refs:
+      - master
+    changes:
+      - lerna.json
+      - .npmrc
+      - .gitlab-ci.yml
+  script:
+    - pnpm config set store-dir .pnpm-store
+    - pnpm install --no-frozen-lockfile
+    - pnpm lerna:bs
+    - pnpm docs:build
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .pnpm-store
+    policy: pull
+  artifacts:
+    paths:
+      - docs-dist/
+      - coverage/
+
+dmd-build-image:
+  stage: buildImage
+  image: harbor.xxx.com/tool/docker:latest
+  only:
+    refs:
+      - test
+      - master
+    changes:
+      - lerna.json
+      - .npmrc
+      - .gitlab-ci.yml
+  script:
+    - docker build -t $IMAGE_NAME .
+    - docker push $IMAGE_NAME
+
+dmd-deploy-company:
+  stage: deploy
+  image: harbor.xxx.com/kubematrix/cli:v1
+  only:
+    refs:
+      - master
+    changes:
+      - lerna.json
+      - .npmrc
+      - .gitlab-ci.yml
+  script:
+    - matrix workloads deploy --cluster company --image $IMAGE_NAME --ports 80 --namespace bert $CI_PROJECT_NAME
+
+dmd-deploy-company-test:
+  stage: deploy
+  image: harbor.xxx.com/kubematrix/cli:v1
+  only:
+    refs:
+      - test
+    changes:
+      - lerna.json
+      - .npmrc
+      - .gitlab-ci.yml
+  script:
+    - matrix workloads deploy --cluster company --image $IMAGE_NAME --ports 80 --namespace bert $CI_PROJECT_NAME-test
+

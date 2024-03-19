@@ -4,7 +4,7 @@ import debounce from 'lodash/debounce';
  * request 网络请求工具
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
-// import { extend, RequestMethod, ResponseError } from 'umi';
+import { history } from 'umi';
 import { extend, RequestMethod, ResponseError } from 'umi-request';
 
 import getGlobalVariable from './getGlobalVariable';
@@ -44,11 +44,15 @@ const debouncedHandler = debounce(
         const location = response.headers.get('location');
         // 进行跳转
         if (location) window.location.replace(location);
-      } else if (status >= 500 && url.includes('/data.goods.mall.searchService/query')) {
+      } else if (
+        status >= 500 &&
+        url.includes('/data.goods.mall.searchService/query')
+      ) {
         message.error('该网址暂未收录，请联系Alan/Marico收录');
       } else if (status === 403) {
         notification.error({
-          message: '您暂无该操作权限，如有需要，请联系相关负责人员，如有疑问请联系产品工作人员',
+          message:
+            '您暂无该操作权限，如有需要，请联系相关负责人员，如有疑问请联系产品工作人员',
         });
       } else {
         if (!request.options?.data?.notification) {
@@ -75,9 +79,15 @@ const errorHandler = (error: ResponseError): any => {
   return response.json();
 };
 
-const requestInterceptors = (request: RequestMethod<false>, variable: keyof DCN_ENV_DECLARE) => {
+const requestInterceptors = (
+  request: RequestMethod<false>,
+  variable: keyof DCN_ENV_DECLARE,
+) => {
   request?.interceptors?.request?.use?.((url: string, options: any) => {
-    if (!/^(http:\/\/|https:\/\/|\/\/)([\w.]+\/?)\S*/.test(options.url) && !options.prefix) {
+    if (
+      !/^(http:\/\/|https:\/\/|\/\/)([\w.]+\/?)\S*/.test(options.url) &&
+      !options.prefix
+    ) {
       options.url = getGlobalVariable()[variable] + options.url;
       url = getGlobalVariable()[variable] + url;
     }
@@ -94,7 +104,10 @@ const handleRequest = (request: RequestMethod<false>, key?: string) => {
     const { url, options } = req;
     let hideMessageError = false;
     //如果接受的参数已经转成formdata,则转json对象格式判断有无hideMessageError
-    console.log('options?.data instanceof FormData', options?.data instanceof FormData);
+    console.log(
+      'options?.data instanceof FormData',
+      options?.data instanceof FormData,
+    );
     if (options?.data instanceof FormData) {
       const objData: { [key: string | number]: any } = {};
       options?.data.forEach((v: any, k: string | number) => {
@@ -108,10 +121,14 @@ const handleRequest = (request: RequestMethod<false>, key?: string) => {
 
     if (key === 'fin') {
       const formatData: any = {};
-      for (let key in options?.data) {
+      for (const key in options?.data) {
         //排除手动设置为空字符串的情况，给后端一个明确的修改指示
-        if (typeof options?.data[key] === 'string' && options?.data[key] !== '') {
-          options?.data[key]?.trim() !== '' && (formatData[key] = options?.data[key]?.trim());
+        if (
+          typeof options?.data[key] === 'string' &&
+          options?.data[key] !== ''
+        ) {
+          options?.data[key]?.trim() !== '' &&
+            (formatData[key] = options?.data[key]?.trim());
         } else {
           formatData[key] = options?.data[key];
         }
@@ -135,9 +152,9 @@ const handleRequest = (request: RequestMethod<false>, key?: string) => {
           message: '当前用户还未做关联，暂无权限访问该应用',
           description: res.m,
         });
-        // process.env.NODE_ENV === 'development' || process.env.API_ENV === 'dev'
-        //   ? history.push('/login/login')
-        //   : history.push('/exception/403');
+        process.env.NODE_ENV === 'development' || process.env.API_ENV === 'dev'
+          ? history.push('/login/login')
+          : history.push('/exception/403');
       } else {
         // 错误，全局提示
         !hideMessageError && message.error(res.m);
@@ -153,7 +170,7 @@ const handleRequest = (request: RequestMethod<false>, key?: string) => {
  * 营销后台 base_url 请求方法
  */
 const request = extend({
-  prefix: process.env.CPS_API_URL,
+  prefix: process.env.XXX_API_URL,
   errorHandler, // 默认错误处理
   timeout: 30000, // 超时时间30秒
   requestType: 'form', // 以表单形式提交参数
@@ -166,7 +183,7 @@ handleRequest(request);
  * 配合修改请求时将传参的空字符串进行去除操作
  */
 export const finRequest = extend({
-  prefix: process.env.CPS_API_URL,
+  prefix: process.env.XXX_API_URL,
   errorHandler, // 默认错误处理
   timeout: 30000, // 超时时间30秒
   requestType: 'form', // 以表单形式提交参数
@@ -186,20 +203,6 @@ export const noPrefixReq = extend({
   requestType: 'form', // 以表单形式提交参数
   credentials: 'include', // 默认请求是否带上cookie
 });
-
-/**
- * 大数据接口请求
- * 传参数据格式 json
- */
-export const bigDataReq = extend({
-  prefix: process.env.BIG_DATA_URL,
-  errorHandler, // 默认错误处理
-  timeout: 30000, // 超时时间30秒
-  requestType: 'json', // 以表单形式提交参数
-  credentials: 'include', // 默认请求是否带上cookie
-});
-
-requestInterceptors(bigDataReq, 'API_CONFIG_BIG_DATA_URL');
 
 /**
  * 大数据接口请求

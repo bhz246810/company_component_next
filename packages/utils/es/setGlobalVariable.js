@@ -25,39 +25,40 @@ function _arrayLikeToArray(arr, len) {
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
-function _iterableToArrayLimit(arr, i) {
-  var _i =
-    null == arr
+function _iterableToArrayLimit(r, l) {
+  var t =
+    null == r
       ? null
-      : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
+      : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
     try {
-      if (((_x = (_i = _i.call(arr)).next), 0 === i)) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
+      if (((i = (t = t.call(r)).next), 0 === l)) {
+        if (Object(t) !== t) return;
+        f = !1;
       } else
         for (
           ;
-          !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i);
-          _n = !0
+          !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l);
+          f = !0
         );
-    } catch (err) {
-      (_d = !0), (_e = err);
+    } catch (r) {
+      (o = !0), (n = r);
     } finally {
       try {
-        if (!_n && null != _i.return && ((_r = _i.return()), Object(_r) !== _r)) return;
+        if (!f && null != t.return && ((u = t.return()), Object(u) !== u))
+          return;
       } finally {
-        if (_d) throw _e;
+        if (o) throw n;
       }
     }
-    return _arr;
+    return a;
   }
 }
 function _arrayWithHoles(arr) {
@@ -68,7 +69,11 @@ var setGlobalVariable = function setGlobalVariable(_ref) {
   var env = _ref.env,
     _ref$writable = _ref.writable,
     writable = _ref$writable === void 0 ? false : _ref$writable;
-  for (var _i = 0, _Object$entries = Object.entries(env); _i < _Object$entries.length; _i++) {
+  for (
+    var _i = 0, _Object$entries = Object.entries(env);
+    _i < _Object$entries.length;
+    _i++
+  ) {
     var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
       key = _Object$entries$_i[0],
       value = _Object$entries$_i[1];

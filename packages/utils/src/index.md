@@ -37,8 +37,8 @@ const Test = () => {
           setGlobalVariable({
             env: {
               API_CONFIG_ENV: 'dev',
-              API_CONFIG_BASE_API: '//cps-api.sk8s.cn/API_CONFIG_BASE_API/',
-              API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/API_CONFIG_CPS_API_URL',
+              API_CONFIG_BASE_API: '//bert-api.sk8s.cn/API_CONFIG_BASE_API/',
+              API_CONFIG_CPS_API_URL: '//bert-api.sk8s.cn/API_CONFIG_CPS_API_URL',
             },
             writable: true, // 对象是否防止篡改
           });

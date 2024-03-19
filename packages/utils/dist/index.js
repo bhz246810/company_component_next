@@ -7,13 +7,16 @@ var _notification = require('antd/es/notification');
 require('antd/es/message/style');
 var _message = require('antd/es/message');
 var debounce = require('lodash/debounce');
+var umiExports = require('@@/core/umiExports');
+var React = require('react');
 var umiRequest = require('umi-request');
 var trim = require('lodash/trim');
 var isNumber = require('lodash/isNumber');
 var moment = require('moment');
 var axios = require('axios');
 var get = require('lodash/get');
-var react = require('react');
+require('antd/es/modal/style');
+var _Modal = require('antd/es/modal');
 
 function _interopDefaultLegacy(e) {
   return e && typeof e === 'object' && 'default' in e ? e : { default: e };
@@ -22,529 +25,537 @@ function _interopDefaultLegacy(e) {
 var _notification__default = /*#__PURE__*/ _interopDefaultLegacy(_notification);
 var _message__default = /*#__PURE__*/ _interopDefaultLegacy(_message);
 var debounce__default = /*#__PURE__*/ _interopDefaultLegacy(debounce);
+var React__default = /*#__PURE__*/ _interopDefaultLegacy(React);
 var trim__default = /*#__PURE__*/ _interopDefaultLegacy(trim);
 var isNumber__default = /*#__PURE__*/ _interopDefaultLegacy(isNumber);
 var moment__default = /*#__PURE__*/ _interopDefaultLegacy(moment);
 var axios__default = /*#__PURE__*/ _interopDefaultLegacy(axios);
 var get__default = /*#__PURE__*/ _interopDefaultLegacy(get);
+var _Modal__default = /*#__PURE__*/ _interopDefaultLegacy(_Modal);
 
-function _iterableToArrayLimit(arr, i) {
-  var _i =
-    null == arr
+function _iterableToArrayLimit(r, l) {
+  var t =
+    null == r
       ? null
-      : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
+      : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
     try {
-      if (((_x = (_i = _i.call(arr)).next), 0 === i)) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
+      if (((i = (t = t.call(r)).next), 0 === l)) {
+        if (Object(t) !== t) return;
+        f = !1;
       } else
         for (
           ;
-          !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i);
-          _n = !0
+          !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l);
+          f = !0
         );
-    } catch (err) {
-      (_d = !0), (_e = err);
+    } catch (r) {
+      (o = !0), (n = r);
     } finally {
       try {
-        if (!_n && null != _i.return && ((_r = _i.return()), Object(_r) !== _r)) return;
+        if (!f && null != t.return && ((u = t.return()), Object(u) !== u))
+          return;
       } finally {
-        if (_d) throw _e;
+        if (o) throw n;
       }
     }
-    return _arr;
+    return a;
   }
 }
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
+function ownKeys(e, r) {
+  var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    enumerableOnly &&
-      (symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    var o = Object.getOwnPropertySymbols(e);
+    r &&
+      (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
       })),
-      keys.push.apply(keys, symbols);
+      t.push.apply(t, o);
   }
-  return keys;
+  return t;
 }
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = null != arguments[i] ? arguments[i] : {};
-    i % 2
-      ? ownKeys(Object(source), !0).forEach(function (key) {
-          _defineProperty(target, key, source[key]);
+function _objectSpread2(e) {
+  for (var r = 1; r < arguments.length; r++) {
+    var t = null != arguments[r] ? arguments[r] : {};
+    r % 2
+      ? ownKeys(Object(t), !0).forEach(function (r) {
+          _defineProperty(e, r, t[r]);
         })
       : Object.getOwnPropertyDescriptors
-      ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-      : ownKeys(Object(source)).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t))
+      : ownKeys(Object(t)).forEach(function (r) {
+          Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
         });
   }
-  return target;
+  return e;
 }
 function _regeneratorRuntime() {
   _regeneratorRuntime = function () {
-    return exports;
+    return e;
   };
-  var exports = {},
-    Op = Object.prototype,
-    hasOwn = Op.hasOwnProperty,
-    defineProperty =
+  var t,
+    e = {},
+    r = Object.prototype,
+    n = r.hasOwnProperty,
+    o =
       Object.defineProperty ||
-      function (obj, key, desc) {
-        obj[key] = desc.value;
+      function (t, e, r) {
+        t[e] = r.value;
       },
-    $Symbol = 'function' == typeof Symbol ? Symbol : {},
-    iteratorSymbol = $Symbol.iterator || '@@iterator',
-    asyncIteratorSymbol = $Symbol.asyncIterator || '@@asyncIterator',
-    toStringTagSymbol = $Symbol.toStringTag || '@@toStringTag';
-  function define(obj, key, value) {
+    i = 'function' == typeof Symbol ? Symbol : {},
+    a = i.iterator || '@@iterator',
+    c = i.asyncIterator || '@@asyncIterator',
+    u = i.toStringTag || '@@toStringTag';
+  function define(t, e, r) {
     return (
-      Object.defineProperty(obj, key, {
-        value: value,
+      Object.defineProperty(t, e, {
+        value: r,
         enumerable: !0,
         configurable: !0,
         writable: !0,
       }),
-      obj[key]
+      t[e]
     );
   }
   try {
     define({}, '');
-  } catch (err) {
-    define = function (obj, key, value) {
-      return (obj[key] = value);
+  } catch (t) {
+    define = function (t, e, r) {
+      return (t[e] = r);
     };
   }
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
-      generator = Object.create(protoGenerator.prototype),
-      context = new Context(tryLocsList || []);
+  function wrap(t, e, r, n) {
+    var i = e && e.prototype instanceof Generator ? e : Generator,
+      a = Object.create(i.prototype),
+      c = new Context(n || []);
     return (
-      defineProperty(generator, '_invoke', {
-        value: makeInvokeMethod(innerFn, self, context),
+      o(a, '_invoke', {
+        value: makeInvokeMethod(t, r, c),
       }),
-      generator
+      a
     );
   }
-  function tryCatch(fn, obj, arg) {
+  function tryCatch(t, e, r) {
     try {
       return {
         type: 'normal',
-        arg: fn.call(obj, arg),
+        arg: t.call(e, r),
       };
-    } catch (err) {
+    } catch (t) {
       return {
         type: 'throw',
-        arg: err,
+        arg: t,
       };
     }
   }
-  exports.wrap = wrap;
-  var ContinueSentinel = {};
+  e.wrap = wrap;
+  var h = 'suspendedStart',
+    l = 'suspendedYield',
+    f = 'executing',
+    s = 'completed',
+    y = {};
   function Generator() {}
   function GeneratorFunction() {}
   function GeneratorFunctionPrototype() {}
-  var IteratorPrototype = {};
-  define(IteratorPrototype, iteratorSymbol, function () {
+  var p = {};
+  define(p, a, function () {
     return this;
   });
-  var getProto = Object.getPrototypeOf,
-    NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-  NativeIteratorPrototype &&
-    NativeIteratorPrototype !== Op &&
-    hasOwn.call(NativeIteratorPrototype, iteratorSymbol) &&
-    (IteratorPrototype = NativeIteratorPrototype);
-  var Gp =
+  var d = Object.getPrototypeOf,
+    v = d && d(d(values([])));
+  v && v !== r && n.call(v, a) && (p = v);
+  var g =
     (GeneratorFunctionPrototype.prototype =
     Generator.prototype =
-      Object.create(IteratorPrototype));
-  function defineIteratorMethods(prototype) {
-    ['next', 'throw', 'return'].forEach(function (method) {
-      define(prototype, method, function (arg) {
-        return this._invoke(method, arg);
+      Object.create(p));
+  function defineIteratorMethods(t) {
+    ['next', 'throw', 'return'].forEach(function (e) {
+      define(t, e, function (t) {
+        return this._invoke(e, t);
       });
     });
   }
-  function AsyncIterator(generator, PromiseImpl) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if ('throw' !== record.type) {
-        var result = record.arg,
-          value = result.value;
-        return value && 'object' == typeof value && hasOwn.call(value, '__await')
-          ? PromiseImpl.resolve(value.__await).then(
-              function (value) {
-                invoke('next', value, resolve, reject);
+  function AsyncIterator(t, e) {
+    function invoke(r, o, i, a) {
+      var c = tryCatch(t[r], t, o);
+      if ('throw' !== c.type) {
+        var u = c.arg,
+          h = u.value;
+        return h && 'object' == typeof h && n.call(h, '__await')
+          ? e.resolve(h.__await).then(
+              function (t) {
+                invoke('next', t, i, a);
               },
-              function (err) {
-                invoke('throw', err, resolve, reject);
+              function (t) {
+                invoke('throw', t, i, a);
               },
             )
-          : PromiseImpl.resolve(value).then(
-              function (unwrapped) {
-                (result.value = unwrapped), resolve(result);
+          : e.resolve(h).then(
+              function (t) {
+                (u.value = t), i(u);
               },
-              function (error) {
-                return invoke('throw', error, resolve, reject);
+              function (t) {
+                return invoke('throw', t, i, a);
               },
             );
       }
-      reject(record.arg);
+      a(c.arg);
     }
-    var previousPromise;
-    defineProperty(this, '_invoke', {
-      value: function (method, arg) {
+    var r;
+    o(this, '_invoke', {
+      value: function (t, n) {
         function callInvokeWithMethodAndArg() {
-          return new PromiseImpl(function (resolve, reject) {
-            invoke(method, arg, resolve, reject);
+          return new e(function (e, r) {
+            invoke(t, n, e, r);
           });
         }
-        return (previousPromise = previousPromise
-          ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg)
+        return (r = r
+          ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg)
           : callInvokeWithMethodAndArg());
       },
     });
   }
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = 'suspendedStart';
-    return function (method, arg) {
-      if ('executing' === state) throw new Error('Generator is already running');
-      if ('completed' === state) {
-        if ('throw' === method) throw arg;
+  function makeInvokeMethod(e, r, n) {
+    var o = h;
+    return function (i, a) {
+      if (o === f) throw new Error('Generator is already running');
+      if (o === s) {
+        if ('throw' === i) throw a;
         return {
-          value: void 0,
+          value: t,
           done: !0,
         };
       }
-      for (context.method = method, context.arg = arg; ; ) {
-        var delegate = context.delegate;
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
+      for (n.method = i, n.arg = a; ; ) {
+        var c = n.delegate;
+        if (c) {
+          var u = maybeInvokeDelegate(c, n);
+          if (u) {
+            if (u === y) continue;
+            return u;
           }
         }
-        if ('next' === context.method) context.sent = context._sent = context.arg;
-        else if ('throw' === context.method) {
-          if ('suspendedStart' === state) throw ((state = 'completed'), context.arg);
-          context.dispatchException(context.arg);
-        } else 'return' === context.method && context.abrupt('return', context.arg);
-        state = 'executing';
-        var record = tryCatch(innerFn, self, context);
-        if ('normal' === record.type) {
-          if (
-            ((state = context.done ? 'completed' : 'suspendedYield'),
-            record.arg === ContinueSentinel)
-          )
-            continue;
+        if ('next' === n.method) n.sent = n._sent = n.arg;
+        else if ('throw' === n.method) {
+          if (o === h) throw ((o = s), n.arg);
+          n.dispatchException(n.arg);
+        } else 'return' === n.method && n.abrupt('return', n.arg);
+        o = f;
+        var p = tryCatch(e, r, n);
+        if ('normal' === p.type) {
+          if (((o = n.done ? s : l), p.arg === y)) continue;
           return {
-            value: record.arg,
-            done: context.done,
+            value: p.arg,
+            done: n.done,
           };
         }
-        'throw' === record.type &&
-          ((state = 'completed'), (context.method = 'throw'), (context.arg = record.arg));
+        'throw' === p.type && ((o = s), (n.method = 'throw'), (n.arg = p.arg));
       }
     };
   }
-  function maybeInvokeDelegate(delegate, context) {
-    var methodName = context.method,
-      method = delegate.iterator[methodName];
-    if (undefined === method)
+  function maybeInvokeDelegate(e, r) {
+    var n = r.method,
+      o = e.iterator[n];
+    if (o === t)
       return (
-        (context.delegate = null),
-        ('throw' === methodName &&
-          delegate.iterator.return &&
-          ((context.method = 'return'),
-          (context.arg = undefined),
-          maybeInvokeDelegate(delegate, context),
-          'throw' === context.method)) ||
-          ('return' !== methodName &&
-            ((context.method = 'throw'),
-            (context.arg = new TypeError(
-              "The iterator does not provide a '" + methodName + "' method",
+        (r.delegate = null),
+        ('throw' === n &&
+          e.iterator.return &&
+          ((r.method = 'return'),
+          (r.arg = t),
+          maybeInvokeDelegate(e, r),
+          'throw' === r.method)) ||
+          ('return' !== n &&
+            ((r.method = 'throw'),
+            (r.arg = new TypeError(
+              "The iterator does not provide a '" + n + "' method",
             )))),
-        ContinueSentinel
+        y
       );
-    var record = tryCatch(method, delegate.iterator, context.arg);
-    if ('throw' === record.type)
-      return (
-        (context.method = 'throw'),
-        (context.arg = record.arg),
-        (context.delegate = null),
-        ContinueSentinel
-      );
-    var info = record.arg;
-    return info
-      ? info.done
-        ? ((context[delegate.resultName] = info.value),
-          (context.next = delegate.nextLoc),
-          'return' !== context.method && ((context.method = 'next'), (context.arg = undefined)),
-          (context.delegate = null),
-          ContinueSentinel)
-        : info
-      : ((context.method = 'throw'),
-        (context.arg = new TypeError('iterator result is not an object')),
-        (context.delegate = null),
-        ContinueSentinel);
+    var i = tryCatch(o, e.iterator, r.arg);
+    if ('throw' === i.type)
+      return (r.method = 'throw'), (r.arg = i.arg), (r.delegate = null), y;
+    var a = i.arg;
+    return a
+      ? a.done
+        ? ((r[e.resultName] = a.value),
+          (r.next = e.nextLoc),
+          'return' !== r.method && ((r.method = 'next'), (r.arg = t)),
+          (r.delegate = null),
+          y)
+        : a
+      : ((r.method = 'throw'),
+        (r.arg = new TypeError('iterator result is not an object')),
+        (r.delegate = null),
+        y);
   }
-  function pushTryEntry(locs) {
-    var entry = {
-      tryLoc: locs[0],
+  function pushTryEntry(t) {
+    var e = {
+      tryLoc: t[0],
     };
-    1 in locs && (entry.catchLoc = locs[1]),
-      2 in locs && ((entry.finallyLoc = locs[2]), (entry.afterLoc = locs[3])),
-      this.tryEntries.push(entry);
+    1 in t && (e.catchLoc = t[1]),
+      2 in t && ((e.finallyLoc = t[2]), (e.afterLoc = t[3])),
+      this.tryEntries.push(e);
   }
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    (record.type = 'normal'), delete record.arg, (entry.completion = record);
+  function resetTryEntry(t) {
+    var e = t.completion || {};
+    (e.type = 'normal'), delete e.arg, (t.completion = e);
   }
-  function Context(tryLocsList) {
+  function Context(t) {
     (this.tryEntries = [
       {
         tryLoc: 'root',
       },
     ]),
-      tryLocsList.forEach(pushTryEntry, this),
+      t.forEach(pushTryEntry, this),
       this.reset(!0);
   }
-  function values(iterable) {
-    if (iterable || '' === iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) return iteratorMethod.call(iterable);
-      if ('function' == typeof iterable.next) return iterable;
-      if (!isNaN(iterable.length)) {
-        var i = -1,
-          next = function next() {
-            for (; ++i < iterable.length; )
-              if (hasOwn.call(iterable, i))
-                return (next.value = iterable[i]), (next.done = !1), next;
-            return (next.value = undefined), (next.done = !0), next;
+  function values(e) {
+    if (e || '' === e) {
+      var r = e[a];
+      if (r) return r.call(e);
+      if ('function' == typeof e.next) return e;
+      if (!isNaN(e.length)) {
+        var o = -1,
+          i = function next() {
+            for (; ++o < e.length; )
+              if (n.call(e, o))
+                return (next.value = e[o]), (next.done = !1), next;
+            return (next.value = t), (next.done = !0), next;
           };
-        return (next.next = next);
+        return (i.next = i);
       }
     }
-    throw new TypeError(typeof iterable + ' is not iterable');
+    throw new TypeError(typeof e + ' is not iterable');
   }
   return (
     (GeneratorFunction.prototype = GeneratorFunctionPrototype),
-    defineProperty(Gp, 'constructor', {
+    o(g, 'constructor', {
       value: GeneratorFunctionPrototype,
       configurable: !0,
     }),
-    defineProperty(GeneratorFunctionPrototype, 'constructor', {
+    o(GeneratorFunctionPrototype, 'constructor', {
       value: GeneratorFunction,
       configurable: !0,
     }),
     (GeneratorFunction.displayName = define(
       GeneratorFunctionPrototype,
-      toStringTagSymbol,
+      u,
       'GeneratorFunction',
     )),
-    (exports.isGeneratorFunction = function (genFun) {
-      var ctor = 'function' == typeof genFun && genFun.constructor;
+    (e.isGeneratorFunction = function (t) {
+      var e = 'function' == typeof t && t.constructor;
       return (
-        !!ctor &&
-        (ctor === GeneratorFunction || 'GeneratorFunction' === (ctor.displayName || ctor.name))
+        !!e &&
+        (e === GeneratorFunction ||
+          'GeneratorFunction' === (e.displayName || e.name))
       );
     }),
-    (exports.mark = function (genFun) {
+    (e.mark = function (t) {
       return (
         Object.setPrototypeOf
-          ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype)
-          : ((genFun.__proto__ = GeneratorFunctionPrototype),
-            define(genFun, toStringTagSymbol, 'GeneratorFunction')),
-        (genFun.prototype = Object.create(Gp)),
-        genFun
+          ? Object.setPrototypeOf(t, GeneratorFunctionPrototype)
+          : ((t.__proto__ = GeneratorFunctionPrototype),
+            define(t, u, 'GeneratorFunction')),
+        (t.prototype = Object.create(g)),
+        t
       );
     }),
-    (exports.awrap = function (arg) {
+    (e.awrap = function (t) {
       return {
-        __await: arg,
+        __await: t,
       };
     }),
     defineIteratorMethods(AsyncIterator.prototype),
-    define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    define(AsyncIterator.prototype, c, function () {
       return this;
     }),
-    (exports.AsyncIterator = AsyncIterator),
-    (exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-      void 0 === PromiseImpl && (PromiseImpl = Promise);
-      var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
-      return exports.isGeneratorFunction(outerFn)
-        ? iter
-        : iter.next().then(function (result) {
-            return result.done ? result.value : iter.next();
+    (e.AsyncIterator = AsyncIterator),
+    (e.async = function (t, r, n, o, i) {
+      void 0 === i && (i = Promise);
+      var a = new AsyncIterator(wrap(t, r, n, o), i);
+      return e.isGeneratorFunction(r)
+        ? a
+        : a.next().then(function (t) {
+            return t.done ? t.value : a.next();
           });
     }),
-    defineIteratorMethods(Gp),
-    define(Gp, toStringTagSymbol, 'Generator'),
-    define(Gp, iteratorSymbol, function () {
+    defineIteratorMethods(g),
+    define(g, u, 'Generator'),
+    define(g, a, function () {
       return this;
     }),
-    define(Gp, 'toString', function () {
+    define(g, 'toString', function () {
       return '[object Generator]';
     }),
-    (exports.keys = function (val) {
-      var object = Object(val),
-        keys = [];
-      for (var key in object) keys.push(key);
+    (e.keys = function (t) {
+      var e = Object(t),
+        r = [];
+      for (var n in e) r.push(n);
       return (
-        keys.reverse(),
+        r.reverse(),
         function next() {
-          for (; keys.length; ) {
-            var key = keys.pop();
-            if (key in object) return (next.value = key), (next.done = !1), next;
+          for (; r.length; ) {
+            var t = r.pop();
+            if (t in e) return (next.value = t), (next.done = !1), next;
           }
           return (next.done = !0), next;
         }
       );
     }),
-    (exports.values = values),
+    (e.values = values),
     (Context.prototype = {
       constructor: Context,
-      reset: function (skipTempReset) {
+      reset: function (e) {
         if (
           ((this.prev = 0),
           (this.next = 0),
-          (this.sent = this._sent = undefined),
+          (this.sent = this._sent = t),
           (this.done = !1),
           (this.delegate = null),
           (this.method = 'next'),
-          (this.arg = undefined),
+          (this.arg = t),
           this.tryEntries.forEach(resetTryEntry),
-          !skipTempReset)
+          !e)
         )
-          for (var name in this)
-            't' === name.charAt(0) &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1)) &&
-              (this[name] = undefined);
+          for (var r in this)
+            't' === r.charAt(0) &&
+              n.call(this, r) &&
+              !isNaN(+r.slice(1)) &&
+              (this[r] = t);
       },
       stop: function () {
         this.done = !0;
-        var rootRecord = this.tryEntries[0].completion;
-        if ('throw' === rootRecord.type) throw rootRecord.arg;
+        var t = this.tryEntries[0].completion;
+        if ('throw' === t.type) throw t.arg;
         return this.rval;
       },
-      dispatchException: function (exception) {
-        if (this.done) throw exception;
-        var context = this;
-        function handle(loc, caught) {
+      dispatchException: function (e) {
+        if (this.done) throw e;
+        var r = this;
+        function handle(n, o) {
           return (
-            (record.type = 'throw'),
-            (record.arg = exception),
-            (context.next = loc),
-            caught && ((context.method = 'next'), (context.arg = undefined)),
-            !!caught
+            (a.type = 'throw'),
+            (a.arg = e),
+            (r.next = n),
+            o && ((r.method = 'next'), (r.arg = t)),
+            !!o
           );
         }
-        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-          var entry = this.tryEntries[i],
-            record = entry.completion;
-          if ('root' === entry.tryLoc) return handle('end');
-          if (entry.tryLoc <= this.prev) {
-            var hasCatch = hasOwn.call(entry, 'catchLoc'),
-              hasFinally = hasOwn.call(entry, 'finallyLoc');
-            if (hasCatch && hasFinally) {
-              if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
-              if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
-            } else if (hasCatch) {
-              if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+        for (var o = this.tryEntries.length - 1; o >= 0; --o) {
+          var i = this.tryEntries[o],
+            a = i.completion;
+          if ('root' === i.tryLoc) return handle('end');
+          if (i.tryLoc <= this.prev) {
+            var c = n.call(i, 'catchLoc'),
+              u = n.call(i, 'finallyLoc');
+            if (c && u) {
+              if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
+              if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
+            } else if (c) {
+              if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
             } else {
-              if (!hasFinally) throw new Error('try statement without catch or finally');
-              if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+              if (!u) throw new Error('try statement without catch or finally');
+              if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
             }
           }
         }
       },
-      abrupt: function (type, arg) {
-        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-          var entry = this.tryEntries[i];
+      abrupt: function (t, e) {
+        for (var r = this.tryEntries.length - 1; r >= 0; --r) {
+          var o = this.tryEntries[r];
           if (
-            entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, 'finallyLoc') &&
-            this.prev < entry.finallyLoc
+            o.tryLoc <= this.prev &&
+            n.call(o, 'finallyLoc') &&
+            this.prev < o.finallyLoc
           ) {
-            var finallyEntry = entry;
+            var i = o;
             break;
           }
         }
-        finallyEntry &&
-          ('break' === type || 'continue' === type) &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc &&
-          (finallyEntry = null);
-        var record = finallyEntry ? finallyEntry.completion : {};
+        i &&
+          ('break' === t || 'continue' === t) &&
+          i.tryLoc <= e &&
+          e <= i.finallyLoc &&
+          (i = null);
+        var a = i ? i.completion : {};
         return (
-          (record.type = type),
-          (record.arg = arg),
-          finallyEntry
-            ? ((this.method = 'next'), (this.next = finallyEntry.finallyLoc), ContinueSentinel)
-            : this.complete(record)
+          (a.type = t),
+          (a.arg = e),
+          i
+            ? ((this.method = 'next'), (this.next = i.finallyLoc), y)
+            : this.complete(a)
         );
       },
-      complete: function (record, afterLoc) {
-        if ('throw' === record.type) throw record.arg;
+      complete: function (t, e) {
+        if ('throw' === t.type) throw t.arg;
         return (
-          'break' === record.type || 'continue' === record.type
-            ? (this.next = record.arg)
-            : 'return' === record.type
-            ? ((this.rval = this.arg = record.arg), (this.method = 'return'), (this.next = 'end'))
-            : 'normal' === record.type && afterLoc && (this.next = afterLoc),
-          ContinueSentinel
+          'break' === t.type || 'continue' === t.type
+            ? (this.next = t.arg)
+            : 'return' === t.type
+            ? ((this.rval = this.arg = t.arg),
+              (this.method = 'return'),
+              (this.next = 'end'))
+            : 'normal' === t.type && e && (this.next = e),
+          y
         );
       },
-      finish: function (finallyLoc) {
-        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-          var entry = this.tryEntries[i];
-          if (entry.finallyLoc === finallyLoc)
-            return (
-              this.complete(entry.completion, entry.afterLoc),
-              resetTryEntry(entry),
-              ContinueSentinel
-            );
+      finish: function (t) {
+        for (var e = this.tryEntries.length - 1; e >= 0; --e) {
+          var r = this.tryEntries[e];
+          if (r.finallyLoc === t)
+            return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y;
         }
       },
-      catch: function (tryLoc) {
-        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-          var entry = this.tryEntries[i];
-          if (entry.tryLoc === tryLoc) {
-            var record = entry.completion;
-            if ('throw' === record.type) {
-              var thrown = record.arg;
-              resetTryEntry(entry);
+      catch: function (t) {
+        for (var e = this.tryEntries.length - 1; e >= 0; --e) {
+          var r = this.tryEntries[e];
+          if (r.tryLoc === t) {
+            var n = r.completion;
+            if ('throw' === n.type) {
+              var o = n.arg;
+              resetTryEntry(r);
             }
-            return thrown;
+            return o;
           }
         }
         throw new Error('illegal catch attempt');
       },
-      delegateYield: function (iterable, resultName, nextLoc) {
+      delegateYield: function (e, r, n) {
         return (
           (this.delegate = {
-            iterator: values(iterable),
-            resultName: resultName,
-            nextLoc: nextLoc,
+            iterator: values(e),
+            resultName: r,
+            nextLoc: n,
           }),
-          'next' === this.method && (this.arg = undefined),
-          ContinueSentinel
+          'next' === this.method && (this.arg = t),
+          y
         );
       },
     }),
-    exports
+    e
   );
+}
+function _toPrimitive(t, r) {
+  if ('object' != typeof t || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || 'default');
+    if ('object' != typeof i) return i;
+    throw new TypeError('@@toPrimitive must return a primitive value.');
+  }
+  return ('string' === r ? String : Number)(t);
+}
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, 'string');
+  return 'symbol' == typeof i ? i : String(i);
 }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -665,20 +676,6 @@ function _nonIterableRest() {
     'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.',
   );
 }
-function _toPrimitive(input, hint) {
-  if (typeof input !== 'object' || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || 'default');
-    if (typeof res !== 'object') return res;
-    throw new TypeError('@@toPrimitive must return a primitive value.');
-  }
-  return (hint === 'string' ? String : Number)(input);
-}
-function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, 'string');
-  return typeof key === 'symbol' ? key : String(key);
-}
 
 var SingleEnv = /*#__PURE__*/ (function () {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -692,8 +689,8 @@ var SingleEnv = /*#__PURE__*/ (function () {
         if (!this._instance) {
           this._instance = {
             API_CONFIG_ENV: 'dev',
-            API_CONFIG_BASE_API: '//cps-api.sk8s.cn/API_CONFIG_BASE_API/',
-            API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/API_CONFIG_CPS_API_URL',
+            API_CONFIG_BASE_API: '//bert-api.sk8s.cn/API_CONFIG_BASE_API/',
+            API_CONFIG_CPS_API_URL: '//bert-api.sk8s.cn/API_CONFIG_CPS_API_URL',
             BUSINESS_API_REQUESET: process.env.BUSINESS_API_REQUESET,
             API_CONFIG_BIG_DATA_URL: '//data.sk8s.cn',
             API_CONFIG_SHAOMAI_API: process.env.API_CONFIG_SHAOMAI_API,
@@ -747,16 +744,23 @@ var debouncedHandler = debounce__default['default'](
         var _location = response.headers.get('location');
         // 进行跳转
         if (_location) window.location.replace(_location);
-      } else if (status >= 500 && url.includes('/data.goods.mall.searchService/query')) {
-        _message__default['default'].error('该网址暂未收录，请联系Alan/Marico收录');
+      } else if (
+        status >= 500 &&
+        url.includes('/data.goods.mall.searchService/query')
+      ) {
+        _message__default['default'].error(
+          '该网址暂未收录，请联系Alan/Marico收录',
+        );
       } else if (status === 403) {
         _notification__default['default'].error({
-          message: '您暂无该操作权限，如有需要，请联系相关负责人员，如有疑问请联系产品工作人员',
+          message:
+            '您暂无该操作权限，如有需要，请联系相关负责人员，如有疑问请联系产品工作人员',
         });
       } else {
         var _request$options, _request$options$data;
         if (
-          !((_request$options = request.options) === null || _request$options === void 0
+          !((_request$options = request.options) === null ||
+          _request$options === void 0
             ? void 0
             : (_request$options$data = _request$options.data) === null ||
               _request$options$data === void 0
@@ -792,7 +796,8 @@ var requestInterceptors = function requestInterceptors(request, variable) {
   var _request$interceptors, _request$interceptors2, _request$interceptors3;
   request === null || request === void 0
     ? void 0
-    : (_request$interceptors = request.interceptors) === null || _request$interceptors === void 0
+    : (_request$interceptors = request.interceptors) === null ||
+      _request$interceptors === void 0
     ? void 0
     : (_request$interceptors2 = _request$interceptors.request) === null ||
       _request$interceptors2 === void 0
@@ -800,16 +805,22 @@ var requestInterceptors = function requestInterceptors(request, variable) {
     : (_request$interceptors3 = _request$interceptors2.use) === null ||
       _request$interceptors3 === void 0
     ? void 0
-    : _request$interceptors3.call(_request$interceptors2, function (url, options) {
-        if (!/^(http:\/\/|https:\/\/|\/\/)([\w.]+\/?)\S*/.test(options.url) && !options.prefix) {
-          options.url = getGlobalVariable()[variable] + options.url;
-          url = getGlobalVariable()[variable] + url;
-        }
-        return {
-          url: url,
-          options: options,
-        };
-      });
+    : _request$interceptors3.call(
+        _request$interceptors2,
+        function (url, options) {
+          if (
+            !/^(http:\/\/|https:\/\/|\/\/)([\w.]+\/?)\S*/.test(options.url) &&
+            !options.prefix
+          ) {
+            options.url = getGlobalVariable()[variable] + options.url;
+            url = getGlobalVariable()[variable] + url;
+          }
+          return {
+            url: url,
+            options: options,
+          };
+        },
+      );
 };
 var handleRequest = function handleRequest(request, key) {
   request.use(
@@ -838,12 +849,14 @@ var handleRequest = function handleRequest(request, key) {
                   hideMessageError = false; //如果接受的参数已经转成formdata,则转json对象格式判断有无hideMessageError
                   console.log(
                     'options?.data instanceof FormData',
-                    (options === null || options === void 0 ? void 0 : options.data) instanceof
-                      FormData,
+                    (options === null || options === void 0
+                      ? void 0
+                      : options.data) instanceof FormData,
                   );
                   if (
-                    (options === null || options === void 0 ? void 0 : options.data) instanceof
-                    FormData
+                    (options === null || options === void 0
+                      ? void 0
+                      : options.data) instanceof FormData
                   ) {
                     objData = {};
                     options === null || options === void 0
@@ -858,31 +871,36 @@ var handleRequest = function handleRequest(request, key) {
                   }
                   if (key === 'fin') {
                     formatData = {};
-                    for (_key in options === null || options === void 0 ? void 0 : options.data) {
+                    for (_key in options === null || options === void 0
+                      ? void 0
+                      : options.data) {
                       //排除手动设置为空字符串的情况，给后端一个明确的修改指示
                       if (
                         typeof (options === null || options === void 0
                           ? void 0
                           : options.data[_key]) === 'string' &&
-                        (options === null || options === void 0 ? void 0 : options.data[_key]) !==
-                          ''
+                        (options === null || options === void 0
+                          ? void 0
+                          : options.data[_key]) !== ''
                       ) {
                         (options === null || options === void 0
                           ? void 0
-                          : (_options$data$_key = options.data[_key]) === null ||
-                            _options$data$_key === void 0
+                          : (_options$data$_key = options.data[_key]) ===
+                              null || _options$data$_key === void 0
                           ? void 0
                           : _options$data$_key.trim()) !== '' &&
                           (formatData[_key] =
                             options === null || options === void 0
                               ? void 0
-                              : (_options$data$_key2 = options.data[_key]) === null ||
-                                _options$data$_key2 === void 0
+                              : (_options$data$_key2 = options.data[_key]) ===
+                                  null || _options$data$_key2 === void 0
                               ? void 0
                               : _options$data$_key2.trim());
                       } else {
                         formatData[_key] =
-                          options === null || options === void 0 ? void 0 : options.data[_key];
+                          options === null || options === void 0
+                            ? void 0
+                            : options.data[_key];
                       }
                     }
                     options.data = formatData;
@@ -890,14 +908,16 @@ var handleRequest = function handleRequest(request, key) {
                   if (
                     options === null || options === void 0
                       ? void 0
-                      : (_options$data = options.data) === null || _options$data === void 0
+                      : (_options$data = options.data) === null ||
+                        _options$data === void 0
                       ? void 0
                       : _options$data.hideMessageError
                   ) {
                     hideMessageError =
                       options === null || options === void 0
                         ? void 0
-                        : (_options$data2 = options.data) === null || _options$data2 === void 0
+                        : (_options$data2 = options.data) === null ||
+                          _options$data2 === void 0
                         ? void 0
                         : _options$data2.hideMessageError;
                     delete options.data.hideMessageError;
@@ -918,12 +938,14 @@ var handleRequest = function handleRequest(request, key) {
                       message: '当前用户还未做关联，暂无权限访问该应用',
                       description: res.m,
                     });
-                    // process.env.NODE_ENV === 'development' || process.env.API_ENV === 'dev'
-                    //   ? history.push('/login/login')
-                    //   : history.push('/exception/403');
+                    process.env.NODE_ENV === 'development' ||
+                    process.env.API_ENV === 'dev'
+                      ? umiExports.history.push('/login/login')
+                      : umiExports.history.push('/exception/403');
                   } else {
                     // 错误，全局提示
-                    !hideMessageError && _message__default['default'].error(res.m);
+                    !hideMessageError &&
+                      _message__default['default'].error(res.m);
                   }
                   _context.next = 17;
                   break;
@@ -947,26 +969,24 @@ var handleRequest = function handleRequest(request, key) {
  * 营销后台 base_url 请求方法
  */
 var request = umiRequest.extend({
-  prefix: process.env.CPS_API_URL,
+  prefix: process.env.XXX_API_URL,
   errorHandler: errorHandler,
   timeout: 30000,
   requestType: 'form',
   credentials: 'include', // 默认请求是否带上cookie
 });
-
 handleRequest(request);
 /**
  * 配置财务request请求时的默认参数
  * 配合修改请求时将传参的空字符串进行去除操作
  */
 var finRequest = umiRequest.extend({
-  prefix: process.env.CPS_API_URL,
+  prefix: process.env.XXX_API_URL,
   errorHandler: errorHandler,
   timeout: 30000,
   requestType: 'form',
   credentials: 'include', // 默认请求是否带上cookie
 });
-
 handleRequest(finRequest, 'fin');
 /**
  * 没有前缀 接口请求
@@ -982,19 +1002,6 @@ var noPrefixReq = umiRequest.extend({
 });
 /**
  * 大数据接口请求
- * 传参数据格式 json
- */
-var bigDataReq = umiRequest.extend({
-  prefix: process.env.BIG_DATA_URL,
-  errorHandler: errorHandler,
-  timeout: 30000,
-  requestType: 'json',
-  credentials: 'include', // 默认请求是否带上cookie
-});
-
-requestInterceptors(bigDataReq, 'API_CONFIG_BIG_DATA_URL');
-/**
- * 大数据接口请求
  * 传参数据格式 form
  */
 var dataReq = umiRequest.extend({
@@ -1004,7 +1011,6 @@ var dataReq = umiRequest.extend({
   requestType: 'form',
   credentials: 'include', // 默认请求是否带上cookie
 });
-
 requestInterceptors(dataReq, 'API_CONFIG_BIG_DATA_URL');
 // 权限系统接口调用
 var authReq = umiRequest.extend({
@@ -1055,14 +1061,12 @@ var fileRequest = umiRequest.extend({
   requestType: 'json',
   credentials: 'include', // 默认请求是否带上cookie
 });
-
 requestInterceptors(fileRequest, 'API_CONFIG_CPS_API_URL');
 
 var uRequest = /*#__PURE__*/ Object.freeze({
   __proto__: null,
   finRequest: finRequest,
   noPrefixReq: noPrefixReq,
-  bigDataReq: bigDataReq,
   dataReq: dataReq,
   authReq: authReq,
   wssReq: wssReq,
@@ -1105,7 +1109,10 @@ var decimalThousand = function decimalThousand(val, num) {
   return val ? str : '0.00';
 };
 function exportCsv(data) {
-  var fileName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'result.csv';
+  var fileName =
+    arguments.length > 1 && arguments[1] !== undefined
+      ? arguments[1]
+      : 'result.csv';
   // console.log('[excel data]', obj);
   // 列表头部
   // let title = obj.title;
@@ -1126,9 +1133,14 @@ function exportCsv(data) {
       });
   var dataKey = Object.keys(data[itemWithMostKeys.index]);
   var res = [];
-  var keys = Object.keys((data === null || data === void 0 ? void 0 : data[0]) || {});
+  var keys = Object.keys(
+    (data === null || data === void 0 ? void 0 : data[0]) || {},
+  );
   // 拼接 enter 键或者换行符
-  res.push(Object.values((data === null || data === void 0 ? void 0 : data[0]) || {}) + '\r\n');
+  res.push(
+    Object.values((data === null || data === void 0 ? void 0 : data[0]) || {}) +
+      '\r\n',
+  );
   for (var i = 0; i < data.length; i++) {
     var temp = [];
     for (var j = 0; j < dataKey.length; j++) {
@@ -1157,8 +1169,12 @@ function parseParam(url) {
   var _exec;
   var paramsObj = {};
   var isNumber = /^-?\d+(\.\d+)?$/; // 判断是否是数
-  var search = (_exec = /(.+)\?(.+)/.exec(url)) === null || _exec === void 0 ? void 0 : _exec[2]; // 问号分割字符串，获取查询参数部分
-  var searchArr = search === null || search === void 0 ? void 0 : search.split('&');
+  var search =
+    (_exec = /(.+)\?(.+)/.exec(url)) === null || _exec === void 0
+      ? void 0
+      : _exec[2]; // 问号分割字符串，获取查询参数部分
+  var searchArr =
+    search === null || search === void 0 ? void 0 : search.split('&');
   searchArr === null || searchArr === void 0
     ? void 0
     : searchArr.forEach(function (e) {
@@ -1171,9 +1187,10 @@ function parseParam(url) {
           // eslint-disable-next-line no-prototype-builtins
           if (paramsObj.hasOwnProperty(keyAndVal[0])) {
             if (Array.isArray(paramsObj[keyAndVal[0]])) {
-              paramsObj[keyAndVal[0]] = [].concat(_toConsumableArray(paramsObj[keyAndVal[0]]), [
-                value,
-              ]);
+              paramsObj[keyAndVal[0]] = [].concat(
+                _toConsumableArray(paramsObj[keyAndVal[0]]),
+                [value],
+              );
             } else {
               paramsObj[keyAndVal[0]] = [paramsObj[keyAndVal[0]], value];
             }
@@ -1199,7 +1216,10 @@ function formatMoney(money, option) {
  * @description 时间格式化
  */
 function momentToString(value) {
-  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'YYYY-MM-DD';
+  var format =
+    arguments.length > 1 && arguments[1] !== undefined
+      ? arguments[1]
+      : 'YYYY-MM-DD';
   return moment__default['default'](value).isValid()
     ? moment__default['default'](value).format(format)
     : undefined;
@@ -1231,7 +1251,9 @@ var docCookies = {
       switch (vEnd.constructor) {
         case Number:
           sExpires =
-            vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
+            vEnd === Infinity
+              ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT'
+              : '; max-age=' + vEnd;
           break;
         case String:
           sExpires = '; expires=' + vEnd;
@@ -1264,7 +1286,9 @@ var docCookies = {
   },
   hasItem: function hasItem(sKey) {
     return new RegExp(
-      '(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&') + '\\s*\\=',
+      '(?:^|;\\s*)' +
+        encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&') +
+        '\\s*\\=',
     ).test(document.cookie);
   },
   keys: /* optional method: you can safely remove it! */ function keys() {
@@ -1282,7 +1306,8 @@ var docCookies = {
  * @description 数值单位格式化
  */
 var numberFormat = function numberFormat(value) {
-  var fix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+  var fix =
+    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
   // if
   if (!value) {
     return '0';
@@ -1312,7 +1337,8 @@ var numberFormat = function numberFormat(value) {
  */
 var number2cnText = function number2cnText(number) {
   var _numbers$, _numbers$$split, _decimal$map;
-  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'upper';
+  var type =
+    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'upper';
   // 配置
   var confs = {
     lower: {
@@ -1333,7 +1359,9 @@ var number2cnText = function number2cnText(number) {
   // 过滤不合法参数
   if (Number(number) > confs.maxNumber) {
     console.error(
-      'The maxNumber is '.concat(confs.maxNumber, '. ').concat(number, ' is bigger than it!'),
+      'The maxNumber is '
+        .concat(confs.maxNumber, '. ')
+        .concat(number, ' is bigger than it!'),
     );
     return '数值过大';
   }
@@ -1345,13 +1373,15 @@ var number2cnText = function number2cnText(number) {
       ? []
       : (_numbers$ = numbers[1]) === null || _numbers$ === void 0
       ? void 0
-      : (_numbers$$split = _numbers$.split) === null || _numbers$$split === void 0
+      : (_numbers$$split = _numbers$.split) === null ||
+        _numbers$$split === void 0
       ? void 0
       : _numbers$$split.call(_numbers$, '');
   // 四位分级
   var levels = integer.reverse().reduce(function (pre, item, idx) {
     var level = pre[0] && pre[0].length < 4 ? pre[0] : [];
-    var value = item === '0' ? conf.num[item] : conf.num[item] + conf.unit[idx % 4];
+    var value =
+      item === '0' ? conf.num[item] : conf.num[item] + conf.unit[idx % 4];
     level.unshift(value);
     if (level.length === 1) {
       pre.unshift(level);
@@ -1490,11 +1520,14 @@ var instance = axios__default['default'].create({
 instance.interceptors.request.use(
   function (config) {
     // console.log('[请求拦截器]', config);
-    if (!/^(http:\/\/|https:\/\/|\/\/)([\w.]+\/?)\S*/.test(config.url) && !config.baseURL) {
+    if (
+      !/^(http:\/\/|https:\/\/|\/\/)([\w.]+\/?)\S*/.test(config.url) &&
+      !config.baseURL
+    ) {
       var _getGlobalVariable$AP;
       // 删除多余的`/`
-      ((_getGlobalVariable$AP = getGlobalVariable().API_CONFIG_BASE_API) === null ||
-      _getGlobalVariable$AP === void 0
+      ((_getGlobalVariable$AP = getGlobalVariable().API_CONFIG_BASE_API) ===
+        null || _getGlobalVariable$AP === void 0
         ? void 0
         : _getGlobalVariable$AP.slice(-1)) === '/' &&
         config.url.slice(0, 1) === '/' &&
@@ -1515,11 +1548,14 @@ instance.interceptors.response.use(
     if (res.status >= 200 && res.status < 300) {
       // console.log('[test]', res.status);
       if (
-        get__default['default'](res.headers, ['content-type'], '') !== 'application/vnd.ms-excel'
+        get__default['default'](res.headers, ['content-type'], '') !==
+        'application/vnd.ms-excel'
       ) {
         var _res$data;
         if (
-          ((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.f) !== 1
+          ((_res$data = res.data) === null || _res$data === void 0
+            ? void 0
+            : _res$data.f) !== 1
         ) {
           return Promise.reject(res).catch(function (err) {
             console.log('【reject】', err);
@@ -1530,11 +1566,14 @@ instance.interceptors.response.use(
         // data就是接口返回的文件流
         var data = res.data;
         if (data) {
-          var _res$headers$content, _attrs$find, _res$headers$content2, _res$headers$content3;
+          var _res$headers$content,
+            _attrs$find,
+            _res$headers$content2,
+            _res$headers$content3;
           var fileName; // 默认 cors 暴露出 content-disposition 请求头，后端返回的filename中文乱码
           var attrs =
-            (_res$headers$content = res.headers['content-disposition']) === null ||
-            _res$headers$content === void 0
+            (_res$headers$content = res.headers['content-disposition']) ===
+              null || _res$headers$content === void 0
               ? void 0
               : _res$headers$content.split(';'); // 获取文件名
           fileName =
@@ -1552,8 +1591,8 @@ instance.interceptors.response.use(
             (_res$headers$content2 = res.headers['content-type']) === null ||
             _res$headers$content2 === void 0
               ? void 0
-              : (_res$headers$content3 = _res$headers$content2.split(';')) === null ||
-                _res$headers$content3 === void 0
+              : (_res$headers$content3 = _res$headers$content2.split(';')) ===
+                  null || _res$headers$content3 === void 0
               ? void 0
               : _res$headers$content3[0];
           var blob = new Blob([data], {
@@ -1576,7 +1615,8 @@ instance.interceptors.response.use(
     } else if (res.status === 403) {
       _notification__default['default'].error({
         key: 'message 403',
-        message: '您暂无该操作权限，如有需要，请联系相关负责人员，如有疑问请联系产品工作人员',
+        message:
+          '您暂无该操作权限，如有需要，请联系相关负责人员，如有疑问请联系产品工作人员',
       });
     } else {
       return Promise.reject(res);
@@ -1592,18 +1632,22 @@ instance.interceptors.response.use(
       if (status === 401) {
         var _getGlobalVariable, _response$headers;
         if (
-          (_getGlobalVariable = getGlobalVariable()) === null || _getGlobalVariable === void 0
+          (_getGlobalVariable = getGlobalVariable()) === null ||
+          _getGlobalVariable === void 0
             ? void 0
             : _getGlobalVariable.API_CONFIG_LOGIN_URL
         ) {
-          window.location.replace(getGlobalVariable().API_CONFIG_LOGIN_URL || '/login');
+          window.location.replace(
+            getGlobalVariable().API_CONFIG_LOGIN_URL || '/login',
+          );
           return;
         }
         //登录态过期
         if (
           response === null || response === void 0
             ? void 0
-            : (_response$headers = response.headers) === null || _response$headers === void 0
+            : (_response$headers = response.headers) === null ||
+              _response$headers === void 0
             ? void 0
             : _response$headers.location
         ) {
@@ -1611,7 +1655,8 @@ instance.interceptors.response.use(
           window.location.replace(
             response === null || response === void 0
               ? void 0
-              : (_response$headers2 = response.headers) === null || _response$headers2 === void 0
+              : (_response$headers2 = response.headers) === null ||
+                _response$headers2 === void 0
               ? void 0
               : _response$headers2.location,
           );
@@ -1626,24 +1671,128 @@ instance.interceptors.response.use(
   },
 );
 
+function reducer(state, action) {
+  var type = action.type,
+    payload = action.payload;
+  switch (type) {
+    case 'open':
+      return _objectSpread2(
+        _objectSpread2({}, state),
+        {},
+        {
+          visible: true,
+        },
+        payload,
+      );
+    case 'close':
+      return _objectSpread2(
+        _objectSpread2({}, state),
+        {},
+        {
+          visible: false,
+        },
+        payload,
+      );
+    default:
+      throw new Error();
+  }
+}
+function useDialog(initial) {
+  var _useReducer = React.useReducer(
+      reducer,
+      _objectSpread2(
+        {
+          visible: false,
+        },
+        initial,
+      ),
+    ),
+    _useReducer2 = _slicedToArray(_useReducer, 2),
+    state = _useReducer2[0],
+    dispatch = _useReducer2[1];
+  var close = React.useCallback(
+    function () {
+      var payload =
+        arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      dispatch({
+        type: 'close',
+        payload: payload,
+      });
+    },
+    [dispatch],
+  );
+  // 调用open的时间直接赋值其他参数过去.
+  var open = React.useCallback(
+    function () {
+      var payload =
+        arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      dispatch({
+        type: 'open',
+        payload: payload,
+      });
+    },
+    [dispatch],
+  );
+  return [state, open, close];
+}
+
+function useModal(props) {
+  var _useDialog = useDialog({}),
+    _useDialog2 = _slicedToArray(_useDialog, 3),
+    state = _useDialog2[0],
+    open = _useDialog2[1],
+    close = _useDialog2[2];
+  var renderModal = React.useMemo(
+    function () {
+      return /*#__PURE__*/ React__default['default'].createElement(
+        _Modal__default['default'],
+        _objectSpread2(
+          _objectSpread2(
+            {
+              onOk: close,
+              onCancel: close,
+              okText: '\u786E\u5B9A',
+              cancelText: '\u53D6\u6D88',
+            },
+            props,
+          ),
+          state,
+        ),
+        props.children(),
+      );
+    },
+    [props.children],
+  );
+  return {
+    renderModal: renderModal,
+    open: open,
+    close: close,
+    state: state,
+  };
+}
+
 function useOnFatherClick(ref, /** 点击内部事件，点击外部事件 */ _ref) {
   var outside = _ref.outside,
     inside = _ref.inside;
-  var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'single';
-  react.useEffect(
+  var type =
+    arguments.length > 2 && arguments[2] !== undefined
+      ? arguments[2]
+      : 'single';
+  React.useEffect(
     function () {
       function handler(event) {
         if (type === 'multi') {
-          Object.entries(ref === null || ref === void 0 ? void 0 : ref.current).forEach(function (
-            _ref2,
-          ) {
+          Object.entries(
+            ref === null || ref === void 0 ? void 0 : ref.current,
+          ).forEach(function (_ref2) {
             var _ref4;
             var _ref3 = _slicedToArray(_ref2, 2),
               name = _ref3[0],
               value = _ref3[1];
             (
-              (_ref4 = (value === null || value === void 0 ? void 0 : value.current) || value) ===
-                null || _ref4 === void 0
+              (_ref4 =
+                (value === null || value === void 0 ? void 0 : value.current) ||
+                value) === null || _ref4 === void 0
                 ? void 0
                 : _ref4.contains(event.target)
             )
@@ -1685,7 +1834,11 @@ var setGlobalVariable = function setGlobalVariable(_ref) {
   var env = _ref.env,
     _ref$writable = _ref.writable,
     writable = _ref$writable === void 0 ? false : _ref$writable;
-  for (var _i = 0, _Object$entries = Object.entries(env); _i < _Object$entries.length; _i++) {
+  for (
+    var _i = 0, _Object$entries = Object.entries(env);
+    _i < _Object$entries.length;
+    _i++
+  ) {
     var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
       key = _Object$entries$_i[0],
       value = _Object$entries$_i[1];
@@ -1700,6 +1853,8 @@ exports.getGlobalVariable = getGlobalVariable;
 exports.request = instance;
 exports.setGlobalVariable = setGlobalVariable;
 exports.uRequest = request;
+exports.useDialog = useDialog;
+exports.useModal = useModal;
 exports.useOnFatherClick = useOnFatherClick;
 exports.utils = utils$1;
 exports.utilsRequest = uRequest;

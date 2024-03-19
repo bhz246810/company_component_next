@@ -1,52 +1,52 @@
-function _typeof(obj) {
+function _typeof(o) {
   '@babel/helpers - typeof';
   return (
     (_typeof =
       'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
-        ? function (obj) {
-            return typeof obj;
+        ? function (o) {
+            return typeof o;
           }
-        : function (obj) {
-            return obj &&
+        : function (o) {
+            return o &&
               'function' == typeof Symbol &&
-              obj.constructor === Symbol &&
-              obj !== Symbol.prototype
+              o.constructor === Symbol &&
+              o !== Symbol.prototype
               ? 'symbol'
-              : typeof obj;
+              : typeof o;
           }),
-    _typeof(obj)
+    _typeof(o)
   );
 }
 import 'antd/es/notification/style';
 import _notification from 'antd/es/notification';
 import 'antd/es/message/style';
 import _message from 'antd/es/message';
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
+function ownKeys(e, r) {
+  var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    enumerableOnly &&
-      (symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    var o = Object.getOwnPropertySymbols(e);
+    r &&
+      (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
       })),
-      keys.push.apply(keys, symbols);
+      t.push.apply(t, o);
   }
-  return keys;
+  return t;
 }
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = null != arguments[i] ? arguments[i] : {};
-    i % 2
-      ? ownKeys(Object(source), !0).forEach(function (key) {
-          _defineProperty(target, key, source[key]);
+function _objectSpread(e) {
+  for (var r = 1; r < arguments.length; r++) {
+    var t = null != arguments[r] ? arguments[r] : {};
+    r % 2
+      ? ownKeys(Object(t), !0).forEach(function (r) {
+          _defineProperty(e, r, t[r]);
         })
       : Object.getOwnPropertyDescriptors
-      ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-      : ownKeys(Object(source)).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t))
+      : ownKeys(Object(t)).forEach(function (r) {
+          Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
         });
   }
-  return target;
+  return e;
 }
 function _defineProperty(obj, key, value) {
   key = _toPropertyKey(key);
@@ -62,19 +62,19 @@ function _defineProperty(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, 'string');
-  return _typeof(key) === 'symbol' ? key : String(key);
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, 'string');
+  return 'symbol' == _typeof(i) ? i : String(i);
 }
-function _toPrimitive(input, hint) {
-  if (_typeof(input) !== 'object' || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || 'default');
-    if (_typeof(res) !== 'object') return res;
+function _toPrimitive(t, r) {
+  if ('object' != _typeof(t) || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || 'default');
+    if ('object' != _typeof(i)) return i;
     throw new TypeError('@@toPrimitive must return a primitive value.');
   }
-  return (hint === 'string' ? String : Number)(input);
+  return ('string' === r ? String : Number)(t);
 }
 /**
  * axios封装
@@ -137,11 +137,14 @@ var instance = axios.create({
 instance.interceptors.request.use(
   function (config) {
     // console.log('[请求拦截器]', config);
-    if (!/^(http:\/\/|https:\/\/|\/\/)([\w.]+\/?)\S*/.test(config.url) && !config.baseURL) {
+    if (
+      !/^(http:\/\/|https:\/\/|\/\/)([\w.]+\/?)\S*/.test(config.url) &&
+      !config.baseURL
+    ) {
       var _getGlobalVariable$AP;
       // 删除多余的`/`
-      ((_getGlobalVariable$AP = getGlobalVariable().API_CONFIG_BASE_API) === null ||
-      _getGlobalVariable$AP === void 0
+      ((_getGlobalVariable$AP = getGlobalVariable().API_CONFIG_BASE_API) ===
+        null || _getGlobalVariable$AP === void 0
         ? void 0
         : _getGlobalVariable$AP.slice(-1)) === '/' &&
         config.url.slice(0, 1) === '/' &&
@@ -161,10 +164,14 @@ instance.interceptors.response.use(
     // console.log('[请求响应]', res);
     if (res.status >= 200 && res.status < 300) {
       // console.log('[test]', res.status);
-      if (get(res.headers, ['content-type'], '') !== 'application/vnd.ms-excel') {
+      if (
+        get(res.headers, ['content-type'], '') !== 'application/vnd.ms-excel'
+      ) {
         var _res$data;
         if (
-          ((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.f) !== 1
+          ((_res$data = res.data) === null || _res$data === void 0
+            ? void 0
+            : _res$data.f) !== 1
         ) {
           return Promise.reject(res).catch(function (err) {
             console.log('【reject】', err);
@@ -175,11 +182,14 @@ instance.interceptors.response.use(
         // data就是接口返回的文件流
         var data = res.data;
         if (data) {
-          var _res$headers$content, _attrs$find, _res$headers$content2, _res$headers$content3;
+          var _res$headers$content,
+            _attrs$find,
+            _res$headers$content2,
+            _res$headers$content3;
           var fileName; // 默认 cors 暴露出 content-disposition 请求头，后端返回的filename中文乱码
           var attrs =
-            (_res$headers$content = res.headers['content-disposition']) === null ||
-            _res$headers$content === void 0
+            (_res$headers$content = res.headers['content-disposition']) ===
+              null || _res$headers$content === void 0
               ? void 0
               : _res$headers$content.split(';'); // 获取文件名
           fileName =
@@ -197,8 +207,8 @@ instance.interceptors.response.use(
             (_res$headers$content2 = res.headers['content-type']) === null ||
             _res$headers$content2 === void 0
               ? void 0
-              : (_res$headers$content3 = _res$headers$content2.split(';')) === null ||
-                _res$headers$content3 === void 0
+              : (_res$headers$content3 = _res$headers$content2.split(';')) ===
+                  null || _res$headers$content3 === void 0
               ? void 0
               : _res$headers$content3[0];
           var blob = new Blob([data], {
@@ -221,7 +231,8 @@ instance.interceptors.response.use(
     } else if (res.status === 403) {
       _notification.error({
         key: 'message 403',
-        message: '您暂无该操作权限，如有需要，请联系相关负责人员，如有疑问请联系产品工作人员',
+        message:
+          '您暂无该操作权限，如有需要，请联系相关负责人员，如有疑问请联系产品工作人员',
       });
     } else {
       return Promise.reject(res);
@@ -237,18 +248,22 @@ instance.interceptors.response.use(
       if (status === 401) {
         var _getGlobalVariable, _response$headers;
         if (
-          (_getGlobalVariable = getGlobalVariable()) === null || _getGlobalVariable === void 0
+          (_getGlobalVariable = getGlobalVariable()) === null ||
+          _getGlobalVariable === void 0
             ? void 0
             : _getGlobalVariable.API_CONFIG_LOGIN_URL
         ) {
-          window.location.replace(getGlobalVariable().API_CONFIG_LOGIN_URL || '/login');
+          window.location.replace(
+            getGlobalVariable().API_CONFIG_LOGIN_URL || '/login',
+          );
           return;
         }
         //登录态过期
         if (
           response === null || response === void 0
             ? void 0
-            : (_response$headers = response.headers) === null || _response$headers === void 0
+            : (_response$headers = response.headers) === null ||
+              _response$headers === void 0
             ? void 0
             : _response$headers.location
         ) {
@@ -256,7 +271,8 @@ instance.interceptors.response.use(
           window.location.replace(
             response === null || response === void 0
               ? void 0
-              : (_response$headers2 = response.headers) === null || _response$headers2 === void 0
+              : (_response$headers2 = response.headers) === null ||
+                _response$headers2 === void 0
               ? void 0
               : _response$headers2.location,
           );

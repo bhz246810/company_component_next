@@ -25,7 +25,7 @@ export default () => {
   return (
     <RemoteSelect
       ref={ref}
-      searchUrl="https://cps-api.sk8s.cn/xxx/list?pageSize=9999"
+      searchUrl="https://bert-api.sk8s.cn/xxx/list?pageSize=9999"
       style={{ width: '200px' }}
       listKey="data, d, Results"
       searchParams={(value) => ({
@@ -33,7 +33,7 @@ export default () => {
         pageSize: 9999,
       })}
       dynamicOptionProps={(item) =>
-        item.id === '1257'
+        item.id === '666'
           ? {
               disabled: true,
             }

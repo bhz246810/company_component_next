@@ -1,7 +1,3 @@
-/**
- * request 网络请求工具
- * 更详细的 api 文档: https://github.com/umijs/umi-request
- */
 import { RequestMethod } from 'umi-request';
 /**
  * 配置request请求时的默认参数
@@ -19,11 +15,6 @@ export declare const finRequest: RequestMethod<false>;
  *
  */
 export declare const noPrefixReq: RequestMethod<false>;
-/**
- * 大数据接口请求
- * 传参数据格式 json
- */
-export declare const bigDataReq: RequestMethod<false>;
 /**
  * 大数据接口请求
  * 传参数据格式 form

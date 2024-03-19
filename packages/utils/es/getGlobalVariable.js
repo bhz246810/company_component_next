@@ -1,20 +1,20 @@
-function _typeof(obj) {
+function _typeof(o) {
   '@babel/helpers - typeof';
   return (
     (_typeof =
       'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
-        ? function (obj) {
-            return typeof obj;
+        ? function (o) {
+            return typeof o;
           }
-        : function (obj) {
-            return obj &&
+        : function (o) {
+            return o &&
               'function' == typeof Symbol &&
-              obj.constructor === Symbol &&
-              obj !== Symbol.prototype
+              o.constructor === Symbol &&
+              o !== Symbol.prototype
               ? 'symbol'
-              : typeof obj;
+              : typeof o;
           }),
-    _typeof(obj)
+    _typeof(o)
   );
 }
 function _classCallCheck(instance, Constructor) {
@@ -37,19 +37,19 @@ function _createClass(Constructor, protoProps, staticProps) {
   Object.defineProperty(Constructor, 'prototype', { writable: false });
   return Constructor;
 }
-function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, 'string');
-  return _typeof(key) === 'symbol' ? key : String(key);
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, 'string');
+  return 'symbol' == _typeof(i) ? i : String(i);
 }
-function _toPrimitive(input, hint) {
-  if (_typeof(input) !== 'object' || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || 'default');
-    if (_typeof(res) !== 'object') return res;
+function _toPrimitive(t, r) {
+  if ('object' != _typeof(t) || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || 'default');
+    if ('object' != _typeof(i)) return i;
     throw new TypeError('@@toPrimitive must return a primitive value.');
   }
-  return (hint === 'string' ? String : Number)(input);
+  return ('string' === r ? String : Number)(t);
 }
 var SingleEnv = /*#__PURE__*/ (function () {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -63,8 +63,8 @@ var SingleEnv = /*#__PURE__*/ (function () {
         if (!this._instance) {
           this._instance = {
             API_CONFIG_ENV: 'dev',
-            API_CONFIG_BASE_API: '//cps-api.sk8s.cn/API_CONFIG_BASE_API/',
-            API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/API_CONFIG_CPS_API_URL',
+            API_CONFIG_BASE_API: '//bert-api.sk8s.cn/API_CONFIG_BASE_API/',
+            API_CONFIG_CPS_API_URL: '//bert-api.sk8s.cn/API_CONFIG_CPS_API_URL',
             BUSINESS_API_REQUESET: process.env.BUSINESS_API_REQUESET,
             API_CONFIG_BIG_DATA_URL: '//data.sk8s.cn',
             API_CONFIG_SHAOMAI_API: process.env.API_CONFIG_SHAOMAI_API,

@@ -1,0 +1,130 @@
+.wordContent {
+  width: 789px;
+  margin: 0 auto;
+  p {
+    margin: 2px 0;
+  }
+  table {
+    margin-bottom: 5px;
+    border-collapse: collapse;
+    display: table;
+    td,
+    th {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+    }
+    th {
+      border-top: 1px solid #bbb;
+      background-color: #f7f7f7;
+    }
+    table tr.firstRow th {
+      border-top-width: 2px;
+    }
+    td p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .textCenter {
+    text-align: center;
+    white-space: nowrap;
+  }
+  .font1 {
+    font-family: 'Times New Roman', serif;
+  }
+  .font2 {
+    font-family: 'Verdana', sans-serif;
+  }
+  .songFont {
+    font-family: 'SimSun', 'fangsong', sans-serif;
+  }
+  .blackFont {
+    color: black;
+  }
+  .td1 {
+    border: 1px solid windowtext;
+    padding: 0px 7px;
+  }
+  .td2 {
+    border-top: 1px solid windowtext;
+    border-right: 1px solid windowtext;
+    border-bottom: 1px solid windowtext;
+    border-image: initial;
+    border-left: none;
+    padding: 0px 7px;
+  }
+  .edit {
+    padding: 0;
+    input {
+      border: 0;
+    }
+    table {
+      margin-bottom: 5px;
+      border-collapse: collapse;
+      display: table;
+      td,
+      th {
+        padding: 5px 10px;
+        border: 0;
+      }
+      th {
+        border-top: 0;
+        background-color: transparent;
+      }
+      table tr.firstRow th {
+        border-top-width: 2px;
+      }
+      td p {
+        margin: 0;
+        padding: 0;
+      }
+    }
+    :global {
+      .ant-picker {
+        padding: 0 11px 0;
+      }
+      .ant-checkbox-wrapper {
+        margin-left: 0 !important;
+      }
+      .ant-checkbox {
+        transform: scale(0.55);
+        .ant-checkbox-inner {
+          background-color: #fff !important;
+          border-color: #000 !important;
+          border-radius: 0;
+          &::after {
+            border-color: #000;
+          }
+        }
+      }
+    }
+  }
+  .td3 {
+    border-right: 1px solid windowtext;
+    border-bottom: 1px solid windowtext;
+    border-left: 1px solid windowtext;
+    border-image: initial;
+    border-top: none;
+    padding: 0px 7px;
+  }
+  .td4 {
+    border-top: none;
+    border-left: none;
+    border-bottom: 1px solid windowtext;
+    border-right: 1px solid windowtext;
+    padding: 0px 7px;
+  }
+  .amount {
+    display: flex;
+    align-items: center;
+  }
+  .feeTable {
+    width: 100%;
+    margin-bottom: 0;
+    font-size: 12px;
+  }
+  .feeTable td {
+    padding: 2px 0;
+    border: none;
+  }
+}

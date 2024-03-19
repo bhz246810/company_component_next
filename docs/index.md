@@ -63,8 +63,8 @@ const Test = () => {
           setGlobalVariable({
             env: {
               API_CONFIG_ENV: 'dev',
-              API_CONFIG_BASE_API: '//cps-api.sk8s.cn/API_CONFIG_BASE_API/',
-              API_CONFIG_CPS_API_URL: '//cps-api.sk8s.cn/API_CONFIG_CPS_API_URL',
+              API_CONFIG_BASE_API: '//bert-api.sk8s.cn/API_CONFIG_BASE_API/',
+              API_CONFIG_CPS_API_URL: '//bert-api.sk8s.cn/API_CONFIG_CPS_API_URL',
               API_CONFIG_BIG_DATA_URL: '//data.sk8s.cn',
             },
             writable: true, // 对象是否防止篡改
@@ -168,8 +168,6 @@ export default Test;
 ### git 规范
 
 #### 简化的 gitflow 规范
-
-
 
 #### commit
 

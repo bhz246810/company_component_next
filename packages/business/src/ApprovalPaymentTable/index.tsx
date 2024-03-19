@@ -96,7 +96,7 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
   style,
   resKey = 'data, d',
   incomeInfo = defaultIncomeInfo,
-  division_code = 'maijia',
+  division_code = 'bert',
   edit = false,
   ...props
 }) => {
@@ -107,7 +107,7 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
   const editType = (keyName: focusType) =>
     edit ? (Array.isArray(edit) ? edit.includes(keyName) : true) : false;
   const editRef: React.MutableRefObject<Record<string, any>> = useRef(
-    Object.keys(defaultFocus).reduce((pre, curr) => {
+    Object.keys(defaultFocus)?.reduce((pre, curr) => {
       return {
         ...pre,
         [curr]: useRef(null),
@@ -145,7 +145,10 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
           id,
           division_code,
         });
-        if (getResKey(resKey.replace(/d$/, 'f'), res) > 0 && getResKey(resKey, res)) {
+        if (
+          getResKey(resKey.replace(/d$/, 'f'), res) > 0 &&
+          getResKey(resKey, res)
+        ) {
           console.log(res);
           const d = getResKey(resKey, res);
           setPaymentInfo({
@@ -205,7 +208,9 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
                 <>
                   <Checkbox
                     {...(checkedKey && {
-                      defaultChecked: (keyMap ? keyMap[curr] : curr) == paymentInfo[checkedKey],
+                      defaultChecked:
+                        (keyMap ? keyMap[curr] : curr) ==
+                        paymentInfo[checkedKey],
                     })}
                   ></Checkbox>
                   {curr}
@@ -222,29 +227,44 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
       <div className={styles.wordContent} style={style}>
         <p className={styles.textCenter}>
           <span className={styles.songFont} style={{ fontSize: '24px' }}>
-            {paymentInfo?.companyName}
+            {paymentInfo?.companyName || '四十大盗'}
           </span>
         </p>
-        <hr style={{ fontWeight: 'bolder', width: '350px', margin: '1px auto' }} />
-        <hr style={{ fontWeight: 'bolder', width: '350px', margin: '1px auto' }} />
+        <hr
+          style={{ fontWeight: 'bolder', width: '350px', margin: '1px auto' }}
+        />
+        <hr
+          style={{ fontWeight: 'bolder', width: '350px', margin: '1px auto' }}
+        />
         <p className={styles.textCenter} style={{ lineHeight: '34px' }}>
           <strong>
-            <span className={`${styles.songFont} ${styles.blackFont}`} style={{ fontSize: '30px' }}>
+            <span
+              className={`${styles.songFont} ${styles.blackFont}`}
+              style={{ fontSize: '30px' }}
+            >
               付款审批单
             </span>
           </strong>
         </p>
         <div style={{ lineHeight: '23px', overflow: 'hidden' }}>
-          <p className={styles.blackFont} style={{ lineHeight: '23px', float: 'left' }}>
+          <p
+            className={styles.blackFont}
+            style={{ lineHeight: '23px', float: 'left' }}
+          >
             <strong>应付单位全称</strong>
             <span className={styles.font2}>:</span>
             &nbsp;
             {paymentInfo?.topSupplierName}
           </p>
-          <p className={styles.blackFont} style={{ lineHeight: '23px', float: 'right' }}>
+          <p
+            className={styles.blackFont}
+            style={{ lineHeight: '23px', float: 'right' }}
+          >
             {/* <span className={styles.font1}>{}</span> */}
             <strong>
-              <span className={styles.songFont}>{isFillTime && now?.[0]}年</span>
+              <span className={styles.songFont}>
+                {isFillTime && now?.[0]}年
+              </span>
             </strong>
             {/* <strong><span className={styles.font1}>{}</span></strong> */}
             <strong>
@@ -281,7 +301,9 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
             <td
               style={{ width: '170px' }}
               colSpan={2}
-              className={`${styles.td2} ${editType('depart') ? styles.edit : ''}`}
+              className={`${styles.td2} ${
+                editType('depart') ? styles.edit : ''
+              }`}
               ref={editRef?.current?.depart}
             >
               {editType('depart') && (
@@ -302,7 +324,9 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
             <td
               style={{ width: '160px' }}
               colSpan={2}
-              className={`${styles.td2} ${editType('nature') ? styles.edit : ''}`}
+              className={`${styles.td2} ${
+                editType('nature') ? styles.edit : ''
+              }`}
               ref={editRef?.current?.nature}
             >
               <p
@@ -341,7 +365,9 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
             >
               {editType('date') && (
                 <DatePicker
-                  getPopupContainer={() => editRef?.current?.date?.current || document.body}
+                  getPopupContainer={() =>
+                    editRef?.current?.date?.current || document?.body
+                  }
                   bordered={false}
                   suffixIcon={() => false}
                   placeholder={(focus?.date && '请选择付款日期') || ''}
@@ -372,7 +398,10 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
               colSpan={10}
               className={styles.td4}
             >
-              <p className={`${styles.blackFont} ${styles.amount}`} style={{ lineHeight: '23px' }}>
+              <p
+                className={`${styles.blackFont} ${styles.amount}`}
+                style={{ lineHeight: '23px' }}
+              >
                 <span className={styles.songFont}>
                   小写：{paymentInfo?.currency === 'USD' ? '$' : '￥'}：
                 </span>
@@ -391,16 +420,18 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
                         style={{ padding: 0 }}
                         onChange={(e) => {
                           const { value } = e.target;
-                          const tempArr = value.split('.');
-                          if (tempArr.length > 1) {
+                          const tempArr = value?.split('.');
+                          if (tempArr?.length > 1) {
                             setAmount(
-                              `${tempArr[0]}.${tempArr?.[1]?.slice(0, 2)}`.replace(
-                                /[^\d{1,}\.\d{1,}|\d{1,}]/g,
-                                '',
-                              ),
+                              `${tempArr[0]}.${tempArr?.[1]?.slice(
+                                0,
+                                2,
+                              )}`.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g, ''),
                             );
                           } else {
-                            setAmount(value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g, ''));
+                            setAmount(
+                              value?.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g, ''),
+                            );
                           }
                         }}
                       ></Input>
@@ -429,7 +460,10 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
                 <span className={styles.songFont}>
                   大写：{paymentInfo?.currency === 'USD' ? '$' : '￥'}：
                 </span>
-                <span className={styles.font2} style={{ textDecoration: 'underline' }}>
+                <span
+                  className={styles.font2}
+                  style={{ textDecoration: 'underline' }}
+                >
                   {/* {paymentInfo?.capitalAmount || <>&nbsp;&nbsp;&nbsp;&nbsp;</>} */}
                   {(Number(amount) > 0
                     ? number2cnText(amount)
@@ -453,9 +487,14 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
               </p>
             </td>
             <td style={{ width: '331px' }} colSpan={5} className={styles.td4}>
-              <p className={styles.textCenter} style={{ lineHeight: '23px', fontSize: '12px' }}>
+              <p
+                className={styles.textCenter}
+                style={{ lineHeight: '23px', fontSize: '12px' }}
+              >
                 <span
-                  className={`${styles.songFont} ${styles.blackFont} ${edit ? styles.edit : ''}`}
+                  className={`${styles.songFont} ${styles.blackFont} ${
+                    edit ? styles.edit : ''
+                  }`}
                 >
                   {replaceCheckBox(
                     '□现金□转账(银行)□转账(Paypal)□支票□电汇□汇票□其他',
@@ -477,7 +516,9 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
             </td>
             <td style={{ width: '196px' }} colSpan={3} className={styles.td4}>
               <p
-                className={`${styles.textCenter} ${styles.blackFont} ${edit ? styles.edit : ''}`}
+                className={`${styles.textCenter} ${styles.blackFont} ${
+                  edit ? styles.edit : ''
+                }`}
                 style={{ lineHeight: '23px', fontSize: '12px' }}
               >
                 {replaceCheckBox('□RMB□USD□其他', 'currency', CURRENCY_MAP)}
@@ -493,7 +534,7 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
               className={`${styles.blackFont} ${styles.td3}`}
             >
               {leftInfo?.length &&
-                leftInfo.map((item) =>
+                leftInfo?.map((item) =>
                   paymentInfo?.[item.keyName] || item.autoHidden === false ? (
                     <>
                       <p style={{ lineHeight: '23px' }}>
@@ -504,7 +545,10 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
                           <span className={styles.font2}>：</span>
                         </strong>
                         <strong>
-                          <span style={{ fontSize: '12px' }} className={styles.songFont}>
+                          <span
+                            style={{ fontSize: '12px' }}
+                            className={styles.songFont}
+                          >
                             {paymentInfo?.[item.keyName] || ''}
                           </span>
                         </strong>
@@ -636,8 +680,12 @@ const ApprovalPaymentTable: React.FC<ApprovalPaymentTableProps> = ({
           </p>
         </p>
         <p className={styles.blackFont} style={{ lineHeight: '23px' }}>
-          <span className={styles.font2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2</span>
-          <span className={styles.songFont}>、付款性质一栏请注明是预付款、尾款或是其他。</span>
+          <span className={styles.font2}>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2
+          </span>
+          <span className={styles.songFont}>
+            、付款性质一栏请注明是预付款、尾款或是其他。
+          </span>
         </p>
       </div>
     </>

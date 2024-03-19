@@ -38,7 +38,7 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  esbuild: {},
+  // esbuild: {},
   devtool: false,
   // 配置 external
   externals: {
@@ -51,12 +51,12 @@ export default defineConfig({
   scripts:
     process.env.NODE_ENV === 'development'
       ? [
-          'https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.development.js',
-          'https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.development.js',
+          'https://gw.alipayobjects.com/os/lib/react/17.0.0/umd/react.development.js',
+          'https://gw.alipayobjects.com/os/lib/react-dom/17.0.0/umd/react-dom.development.js',
         ]
       : [
-          'https://gw.alipayobjects.com/os/lib/react/16.13.1/umd/react.production.min.js',
-          'https://gw.alipayobjects.com/os/lib/react-dom/16.13.1/umd/react-dom.production.min.js',
+          'https://gw.alipayobjects.com/os/lib/react/17.0.0/umd/react.production.min.js',
+          'https://gw.alipayobjects.com/os/lib/react-dom/17.0.0/umd/react-dom.production.min.js',
         ],
   dynamicImport: {},
   extraBabelPlugins: [

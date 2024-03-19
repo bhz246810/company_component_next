@@ -25,39 +25,40 @@ function _arrayLikeToArray(arr, len) {
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
-function _iterableToArrayLimit(arr, i) {
-  var _i =
-    null == arr
+function _iterableToArrayLimit(r, l) {
+  var t =
+    null == r
       ? null
-      : ('undefined' != typeof Symbol && arr[Symbol.iterator]) || arr['@@iterator'];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
+      : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
     try {
-      if (((_x = (_i = _i.call(arr)).next), 0 === i)) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
+      if (((i = (t = t.call(r)).next), 0 === l)) {
+        if (Object(t) !== t) return;
+        f = !1;
       } else
         for (
           ;
-          !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i);
-          _n = !0
+          !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l);
+          f = !0
         );
-    } catch (err) {
-      (_d = !0), (_e = err);
+    } catch (r) {
+      (o = !0), (n = r);
     } finally {
       try {
-        if (!_n && null != _i.return && ((_r = _i.return()), Object(_r) !== _r)) return;
+        if (!f && null != t.return && ((u = t.return()), Object(u) !== u))
+          return;
       } finally {
-        if (_d) throw _e;
+        if (o) throw n;
       }
     }
-    return _arr;
+    return a;
   }
 }
 function _arrayWithHoles(arr) {
@@ -67,21 +68,25 @@ import { useEffect } from 'react';
 function useOnFatherClick(ref, /** 点击内部事件，点击外部事件 */ _ref) {
   var outside = _ref.outside,
     inside = _ref.inside;
-  var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'single';
+  var type =
+    arguments.length > 2 && arguments[2] !== undefined
+      ? arguments[2]
+      : 'single';
   useEffect(
     function () {
       function handler(event) {
         if (type === 'multi') {
-          Object.entries(ref === null || ref === void 0 ? void 0 : ref.current).forEach(function (
-            _ref2,
-          ) {
+          Object.entries(
+            ref === null || ref === void 0 ? void 0 : ref.current,
+          ).forEach(function (_ref2) {
             var _ref4;
             var _ref3 = _slicedToArray(_ref2, 2),
               name = _ref3[0],
               value = _ref3[1];
             (
-              (_ref4 = (value === null || value === void 0 ? void 0 : value.current) || value) ===
-                null || _ref4 === void 0
+              (_ref4 =
+                (value === null || value === void 0 ? void 0 : value.current) ||
+                value) === null || _ref4 === void 0
                 ? void 0
                 : _ref4.contains(event.target)
             )

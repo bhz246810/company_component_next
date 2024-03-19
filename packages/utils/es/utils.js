@@ -71,7 +71,10 @@ export var decimalThousand = function decimalThousand(val, num) {
   return val ? str : '0.00';
 };
 export function exportCsv(data) {
-  var fileName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'result.csv';
+  var fileName =
+    arguments.length > 1 && arguments[1] !== undefined
+      ? arguments[1]
+      : 'result.csv';
   // console.log('[excel data]', obj);
   // 列表头部
   // let title = obj.title;
@@ -92,9 +95,14 @@ export function exportCsv(data) {
       });
   var dataKey = Object.keys(data[itemWithMostKeys.index]);
   var res = [];
-  var keys = Object.keys((data === null || data === void 0 ? void 0 : data[0]) || {});
+  var keys = Object.keys(
+    (data === null || data === void 0 ? void 0 : data[0]) || {},
+  );
   // 拼接 enter 键或者换行符
-  res.push(Object.values((data === null || data === void 0 ? void 0 : data[0]) || {}) + '\r\n');
+  res.push(
+    Object.values((data === null || data === void 0 ? void 0 : data[0]) || {}) +
+      '\r\n',
+  );
   for (var i = 0; i < data.length; i++) {
     var temp = [];
     for (var j = 0; j < dataKey.length; j++) {
@@ -123,8 +131,12 @@ export function parseParam(url) {
   var _exec;
   var paramsObj = {};
   var isNumber = /^-?\d+(\.\d+)?$/; // 判断是否是数
-  var search = (_exec = /(.+)\?(.+)/.exec(url)) === null || _exec === void 0 ? void 0 : _exec[2]; // 问号分割字符串，获取查询参数部分
-  var searchArr = search === null || search === void 0 ? void 0 : search.split('&');
+  var search =
+    (_exec = /(.+)\?(.+)/.exec(url)) === null || _exec === void 0
+      ? void 0
+      : _exec[2]; // 问号分割字符串，获取查询参数部分
+  var searchArr =
+    search === null || search === void 0 ? void 0 : search.split('&');
   searchArr === null || searchArr === void 0
     ? void 0
     : searchArr.forEach(function (e) {
@@ -137,9 +149,10 @@ export function parseParam(url) {
           // eslint-disable-next-line no-prototype-builtins
           if (paramsObj.hasOwnProperty(keyAndVal[0])) {
             if (Array.isArray(paramsObj[keyAndVal[0]])) {
-              paramsObj[keyAndVal[0]] = [].concat(_toConsumableArray(paramsObj[keyAndVal[0]]), [
-                value,
-              ]);
+              paramsObj[keyAndVal[0]] = [].concat(
+                _toConsumableArray(paramsObj[keyAndVal[0]]),
+                [value],
+              );
             } else {
               paramsObj[keyAndVal[0]] = [paramsObj[keyAndVal[0]], value];
             }
@@ -165,7 +178,10 @@ export function formatMoney(money, option) {
  * @description 时间格式化
  */
 export function momentToString(value) {
-  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'YYYY-MM-DD';
+  var format =
+    arguments.length > 1 && arguments[1] !== undefined
+      ? arguments[1]
+      : 'YYYY-MM-DD';
   return moment(value).isValid() ? moment(value).format(format) : undefined;
 }
 /**
@@ -195,7 +211,9 @@ export var docCookies = {
       switch (vEnd.constructor) {
         case Number:
           sExpires =
-            vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
+            vEnd === Infinity
+              ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT'
+              : '; max-age=' + vEnd;
           break;
         case String:
           sExpires = '; expires=' + vEnd;
@@ -230,7 +248,9 @@ export var docCookies = {
   },
   hasItem: function hasItem(sKey) {
     return new RegExp(
-      '(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&') + '\\s*\\=',
+      '(?:^|;\\s*)' +
+        encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&') +
+        '\\s*\\=',
     ).test(document.cookie);
   },
   keys: /* optional method: you can safely remove it! */ function keys() {
@@ -248,7 +268,8 @@ export var docCookies = {
  * @description 数值单位格式化
  */
 export var numberFormat = function numberFormat(value) {
-  var fix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+  var fix =
+    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
   // if
   if (!value) {
     return '0';
@@ -278,7 +299,8 @@ export var numberFormat = function numberFormat(value) {
  */
 export var number2cnText = function number2cnText(number) {
   var _numbers$, _numbers$$split, _decimal$map;
-  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'upper';
+  var type =
+    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'upper';
   // 配置
   var confs = {
     lower: {
@@ -299,7 +321,9 @@ export var number2cnText = function number2cnText(number) {
   // 过滤不合法参数
   if (Number(number) > confs.maxNumber) {
     console.error(
-      'The maxNumber is '.concat(confs.maxNumber, '. ').concat(number, ' is bigger than it!'),
+      'The maxNumber is '
+        .concat(confs.maxNumber, '. ')
+        .concat(number, ' is bigger than it!'),
     );
     return '数值过大';
   }
@@ -311,13 +335,15 @@ export var number2cnText = function number2cnText(number) {
       ? []
       : (_numbers$ = numbers[1]) === null || _numbers$ === void 0
       ? void 0
-      : (_numbers$$split = _numbers$.split) === null || _numbers$$split === void 0
+      : (_numbers$$split = _numbers$.split) === null ||
+        _numbers$$split === void 0
       ? void 0
       : _numbers$$split.call(_numbers$, '');
   // 四位分级
   var levels = integer.reverse().reduce(function (pre, item, idx) {
     var level = pre[0] && pre[0].length < 4 ? pre[0] : [];
-    var value = item === '0' ? conf.num[item] : conf.num[item] + conf.unit[idx % 4];
+    var value =
+      item === '0' ? conf.num[item] : conf.num[item] + conf.unit[idx % 4];
     level.unshift(value);
     if (level.length === 1) {
       pre.unshift(level);

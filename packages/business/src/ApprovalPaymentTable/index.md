@@ -3,7 +3,7 @@ title: 付款审批单 | ApprovalPaymentTable
 nav:
   path: /business
 group:
-  title: 其他业务组件
+  title: 业务组件
   path: /other
 ---
 
@@ -32,7 +32,7 @@ export default () => {
       <h3>项目中台</h3>
       <Checkbox defaultChecked onChange={(e) => setEdit(e.target.checked)} /> 是否可以编辑
       <ApprovalPaymentTable id="1567" edit={edit} />
-      <h3>CPS</h3>
+      <h3>业务系统</h3>
       开启部分编辑 edit=['depart','nature', 'date'] 开启部门、付款性质和付款日期（还有一个
       付款总额amount 未开启）
       <ApprovalPaymentTable

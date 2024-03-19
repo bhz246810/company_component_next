@@ -15,7 +15,10 @@ export declare function moneyFormat(value: string | number): string;
  * @param {string | number} num 保留位数
  * @returns
  */
-export declare const decimalThousand: (val: number | string, num: number) => string;
+export declare const decimalThousand: (
+  val: number | string,
+  num: number,
+) => string;
 export declare function exportCsv(data: any[], fileName?: string): void;
 export declare function parseParam(url: string): {
   [key: string]: any;
@@ -29,7 +32,10 @@ export declare function formatMoney(
 /**
  * @description 时间格式化
  */
-export declare function momentToString(value: Moment | string, format?: string): string | undefined;
+export declare function momentToString(
+  value: Moment | string,
+  format?: string,
+): string | undefined;
 /**
  * @description Cookies操作
  */
@@ -59,7 +65,10 @@ export declare const numberFormat: (value: number, fix?: number) => string;
  *
  * @example number2text(100000000) => "壹亿元整"
  */
-export declare const number2cnText: (number: number | string, type?: 'lower' | 'upper') => string;
+export declare const number2cnText: (
+  number: number | string,
+  type?: 'lower' | 'upper',
+) => string;
 /**
  * @description: 按照逗号字符串顺序获取 obj 内属性
  * @param {string} keyNames
